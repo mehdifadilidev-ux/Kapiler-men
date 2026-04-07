@@ -13,14 +13,19 @@ import { UploadModule } from './upload/upload.module';
 if (getApps().length === 0 && process.env.FIREBASE_STORAGE_BUCKET) {
   let serviceAccount: Record<string, string> | undefined;
 
-  // In production: read from env variable
+  // In production: read from env variable (JSON string)
   if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
     serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
   }
-  // In dev: read from file
+  // In dev: read from file path OR inline JSON
   else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-    const serviceAccountPath = resolve(process.env.FIREBASE_SERVICE_ACCOUNT);
-    serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf-8'));
+    const value = process.env.FIREBASE_SERVICE_ACCOUNT.trim();
+    if (value.startsWith('{')) {
+      serviceAccount = JSON.parse(value);
+    } else {
+      const serviceAccountPath = resolve(value);
+      serviceAccount = JSON.parse(readFileSync(serviceAccountPath, 'utf-8'));
+    }
   }
 
   if (serviceAccount) {

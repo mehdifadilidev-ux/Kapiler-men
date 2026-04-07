@@ -14,9 +14,22 @@ async function bootstrap() {
   // Cookie parser for HTTP-only refresh tokens
   app.use(cookieParser());
 
-  // CORS
+  // CORS — support multiple origins (comma-separated) + Vercel previews
   app.enableCors({
-    origin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
+    origin: (origin, callback) => {
+      const allowed = (process.env.CORS_ORIGIN ?? 'http://localhost:3000')
+        .split(',')
+        .map((o) => o.trim());
+
+      // Allow requests with no origin (mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+      // Allow exact match
+      if (allowed.includes(origin)) return callback(null, true);
+      // Allow all Vercel preview URLs
+      if (origin.endsWith('.vercel.app')) return callback(null, true);
+
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   });
 

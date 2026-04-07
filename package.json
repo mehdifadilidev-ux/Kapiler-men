@@ -1,0 +1,27 @@
+{
+  "name": "kpil-r-men",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "dev": "pnpm run dev:web & pnpm run dev:api",
+    "build:shared": "pnpm --filter @kpil/shared build",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "build": "pnpm build:shared && pnpm build:web && pnpm build:api",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.1.0"
+}

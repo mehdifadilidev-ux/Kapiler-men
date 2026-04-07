@@ -22,7 +22,7 @@ async function setupCors() {
 
   await bucket.setCorsConfiguration([
     {
-      origin: ['http://localhost:3000', 'https://www.kpilrmen.fr'],
+      origin: ['*'],
       method: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
       maxAgeSeconds: 3600,
       responseHeader: ['Content-Type', 'Authorization'],

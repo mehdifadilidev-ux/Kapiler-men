@@ -58,7 +58,7 @@ export function HomeContent() {
         {banner && (
           <div className="bg-bois px-4 py-3 text-center text-sm text-white">
             {banner.link ? (
-              <Link href={banner.link} className="underline underline-offset-2">
+              <Link href={banner.link} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
                 {banner.text}
               </Link>
             ) : (

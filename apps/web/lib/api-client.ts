@@ -96,9 +96,11 @@ async function request<T>(endpoint: string, options: RequestInit = {}, isRetry =
 
 export const apiClient = {
   get: <T>(endpoint: string) => request<T>(endpoint),
-  post: <T>(endpoint: string, body: unknown) =>
-    request<T>(endpoint, { method: 'POST', body: JSON.stringify(body) }),
+  post: <T>(endpoint: string, body?: unknown) =>
+    request<T>(endpoint, body !== undefined ? { method: 'POST', body: JSON.stringify(body) } : { method: 'POST' }),
   put: <T>(endpoint: string, body: unknown) =>
     request<T>(endpoint, { method: 'PUT', body: JSON.stringify(body) }),
+  patch: <T>(endpoint: string, body?: unknown) =>
+    request<T>(endpoint, body !== undefined ? { method: 'PATCH', body: JSON.stringify(body) } : { method: 'PATCH' }),
   delete: <T>(endpoint: string) => request<T>(endpoint, { method: 'DELETE' }),
 };

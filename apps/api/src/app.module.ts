@@ -6,6 +6,8 @@ import { resolve } from 'path';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { GalleryCategoriesModule } from './gallery-categories/gallery-categories.module';
+import { NewsBannerModule } from './news-banner/news-banner.module';
 import { ServicesModule } from './services/services.module';
 import { UploadModule } from './upload/upload.module';
 
@@ -42,6 +44,8 @@ if (getApps().length === 0 && process.env.FIREBASE_STORAGE_BUCKET) {
     DatabaseModule,
     AuthModule,
     GalleryModule,
+    GalleryCategoriesModule,
+    NewsBannerModule,
     ServicesModule,
     UploadModule,
   ],

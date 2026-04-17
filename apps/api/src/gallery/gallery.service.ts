@@ -5,10 +5,12 @@ import type { CreateGalleryDto, UpdateGalleryDto, ReorderGalleryDto } from '@kpi
 
 interface GalleryRow {
   id: string;
+  category_id: string;
+  type: 'single' | 'before_after';
   title: string;
   description: string | null;
   before_image: string;
-  after_image: string;
+  after_image: string | null;
   position: number;
   created_at: Date;
   updated_at: Date;
@@ -16,10 +18,12 @@ interface GalleryRow {
 
 export interface GalleryResponse {
   id: string;
+  categoryId: string;
+  type: 'single' | 'before_after';
   title: string;
   description: string | null;
   beforeImage: string;
-  afterImage: string;
+  afterImage: string | null;
   position: number;
   createdAt: string;
   updatedAt: string;
@@ -28,6 +32,8 @@ export interface GalleryResponse {
 function toResponse(row: GalleryRow): GalleryResponse {
   return {
     id: row.id,
+    categoryId: row.category_id,
+    type: row.type,
     title: row.title,
     description: row.description,
     beforeImage: row.before_image,
@@ -45,7 +51,17 @@ export class GalleryService {
     private uploadService: UploadService,
   ) {}
 
-  async findAll(): Promise<GalleryResponse[]> {
+  async findAll(categorySlug?: string): Promise<GalleryResponse[]> {
+    if (categorySlug) {
+      const rows = await this.db.sql<GalleryRow[]>`
+        SELECT gi.* FROM gallery_items gi
+        JOIN gallery_categories gc ON gc.id = gi.category_id
+        WHERE gc.slug = ${categorySlug}
+        ORDER BY gi.position ASC, gi.created_at DESC
+      `;
+      return rows.map(toResponse);
+    }
+
     const rows = await this.db.sql<GalleryRow[]>`
       SELECT * FROM gallery_items ORDER BY position ASC, created_at DESC
     `;
@@ -66,13 +82,21 @@ export class GalleryService {
 
   async create(dto: CreateGalleryDto): Promise<GalleryResponse> {
     const [maxPos] = await this.db.sql<{ max: number | null }[]>`
-      SELECT MAX(position) as max FROM gallery_items
+      SELECT MAX(position) as max FROM gallery_items WHERE category_id = ${dto.categoryId}
     `;
     const nextPosition = (maxPos?.max ?? -1) + 1;
 
     const [item] = await this.db.sql<GalleryRow[]>`
-      INSERT INTO gallery_items (title, description, before_image, after_image, position)
-      VALUES (${dto.title}, ${dto.description ?? null}, ${dto.beforeImage}, ${dto.afterImage}, ${nextPosition})
+      INSERT INTO gallery_items (category_id, type, title, description, before_image, after_image, position)
+      VALUES (
+        ${dto.categoryId},
+        ${dto.type ?? 'before_after'},
+        ${dto.title},
+        ${dto.description ?? null},
+        ${dto.beforeImage},
+        ${dto.afterImage ?? null},
+        ${nextPosition}
+      )
       RETURNING *
     `;
 
@@ -94,6 +118,8 @@ export class GalleryService {
 
     const [item] = await this.db.sql<GalleryRow[]>`
       UPDATE gallery_items SET
+        category_id = ${dto.categoryId ?? existing.category_id},
+        type = ${dto.type ?? existing.type},
         title = ${dto.title ?? existing.title},
         description = ${dto.description ?? existing.description},
         before_image = ${dto.beforeImage ?? existing.before_image},
@@ -120,7 +146,9 @@ export class GalleryService {
     }
 
     await this.uploadService.deleteFile(this.extractFilePath(item.before_image));
-    await this.uploadService.deleteFile(this.extractFilePath(item.after_image));
+    if (item.after_image) {
+      await this.uploadService.deleteFile(this.extractFilePath(item.after_image));
+    }
 
     await this.db.sql`DELETE FROM gallery_items WHERE id = ${id}`;
   }

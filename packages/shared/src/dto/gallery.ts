@@ -1,10 +1,15 @@
 import { z } from 'zod';
 
+// Gallery item types
+export const GALLERY_ITEM_TYPES = ['single', 'before_after'] as const;
+
 export const createGallerySchema = z.object({
+  categoryId: z.string().uuid(),
+  type: z.enum(GALLERY_ITEM_TYPES).default('before_after'),
   title: z.string().min(1).max(255),
   description: z.string().optional(),
   beforeImage: z.string().url(),
-  afterImage: z.string().url(),
+  afterImage: z.string().url().optional(),
 });
 
 export type CreateGalleryDto = z.infer<typeof createGallerySchema>;
@@ -13,8 +18,14 @@ export const updateGallerySchema = createGallerySchema.partial();
 
 export type UpdateGalleryDto = z.infer<typeof updateGallerySchema>;
 
-export const galleryItemSchema = createGallerySchema.extend({
+export const galleryItemSchema = z.object({
   id: z.string().uuid(),
+  categoryId: z.string().uuid(),
+  type: z.enum(GALLERY_ITEM_TYPES),
+  title: z.string(),
+  description: z.string().nullable(),
+  beforeImage: z.string(),
+  afterImage: z.string().nullable(),
   position: z.number().int(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),

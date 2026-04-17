@@ -31,18 +31,34 @@ export default function AdminDashboardPage() {
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         <Link
+          href="/admin/actualites"
+          className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
+        >
+          <h2 className="font-montserrat text-xl font-semibold">Actualites</h2>
+          <p className="mt-2 text-sm text-gray">Gerer la banniere d&apos;actualites</p>
+        </Link>
+
+        <Link
           href="/admin/galerie"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
-          <h2 className="font-montserrat text-xl font-semibold">Galerie avant/apres</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les photos avant/apres</p>
+          <h2 className="font-montserrat text-xl font-semibold">Galerie</h2>
+          <p className="mt-2 text-sm text-gray">Gerer les photos par categorie</p>
+        </Link>
+
+        <Link
+          href="/admin/galerie/categories"
+          className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
+        >
+          <h2 className="font-montserrat text-xl font-semibold">Categories galerie</h2>
+          <p className="mt-2 text-sm text-gray">Gerer les categories de la galerie</p>
         </Link>
 
         <Link
           href="/admin/services"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
-          <h2 className="font-montserrat text-xl font-semibold">Prestations</h2>
+          <h2 className="font-montserrat text-xl font-semibold">Soins</h2>
           <p className="mt-2 text-sm text-gray">Gerer les prestations et tarifs</p>
         </Link>
       </div>

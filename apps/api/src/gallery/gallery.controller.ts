@@ -7,6 +7,7 @@ import {
   Patch,
   Param,
   Body,
+  Query,
   UseGuards,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -20,8 +21,8 @@ export class GalleryController {
 
   // Public routes
   @Get('gallery')
-  findAll(): Promise<GalleryResponse[]> {
-    return this.galleryService.findAll();
+  findAll(@Query('category') category?: string): Promise<GalleryResponse[]> {
+    return this.galleryService.findAll(category);
   }
 
   @Get('gallery/:id')

@@ -7,10 +7,11 @@ import { useState } from 'react';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
-  { href: '/prestations', label: 'Prestations' },
+  { href: '/presentation', label: 'Presentation' },
+  { href: '/soins', label: 'Soins' },
+  { href: '/temoignages', label: 'Temoignages' },
   { href: '/galerie', label: 'Galerie' },
-  { href: '/activite-2', label: 'Activite 2' },
-  { href: '/activite-3', label: 'Activite 3' },
+  { href: '/contact', label: 'Contact' },
 ] as const;
 
 export function Header() {
@@ -33,7 +34,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -46,10 +47,10 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/reserver"
+            href="/rendez-vous"
             className="bg-bois px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
           >
-            Reserver
+            Rendez-vous
           </Link>
         </nav>
 
@@ -57,7 +58,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
+          className="flex flex-col gap-1.5 lg:hidden"
           aria-label="Menu"
         >
           <span
@@ -74,7 +75,7 @@ export function Header() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <nav className="border-t border-bois-light px-6 pb-6 pt-4 md:hidden">
+        <nav className="border-t border-bois-light px-6 pb-6 pt-4 lg:hidden">
           <div className="flex flex-col gap-4">
             {NAV_LINKS.map((link) => (
               <Link
@@ -89,11 +90,11 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/reserver"
+              href="/rendez-vous"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 bg-bois px-6 py-3 text-center text-xs font-semibold uppercase tracking-widest text-white"
             >
-              Reserver
+              Rendez-vous
             </Link>
           </div>
         </nav>

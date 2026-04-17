@@ -52,7 +52,7 @@ export function useDeleteGalleryItem() {
 export function useReorderGallery() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (dto: ReorderGalleryDto) => apiClient.post('/admin/gallery/order', dto),
+    mutationFn: (dto: ReorderGalleryDto) => apiClient.patch('/admin/gallery/order', dto),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.gallery.all });
     },

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function ReserverPage() {
+export default function RendezVousPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -45,9 +45,9 @@ export default function ReserverPage() {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-24">
-      <h1 className="font-montserrat text-4xl font-semibold">Reserver un rendez-vous</h1>
+      <h1 className="font-montserrat text-4xl font-semibold">Prendre rendez-vous</h1>
       <p className="mt-4 text-gray">
-        Choisissez votre prestation et reservez directement en ligne.
+        Choisissez votre soin et reservez directement en ligne.
       </p>
       <div ref={containerRef} className="mt-12 min-h-[600px]" />
     </main>

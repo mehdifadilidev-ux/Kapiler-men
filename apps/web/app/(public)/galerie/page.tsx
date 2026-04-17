@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { GalerieContent } from './GalerieContent';
 
 export const metadata: Metadata = {
-  title: 'Galerie avant/apres',
+  title: 'Galerie',
   description:
-    'Decouvrez nos transformations capillaires en images. Resultats avant et apres de nos clients.',
+    'Decouvrez nos realisations en images : transformations capillaires, institut, evenements.',
   openGraph: {
-    title: 'Galerie avant/apres | KPIL R Men',
-    description: 'Transformations capillaires : resultats avant et apres',
+    title: 'Galerie | KPIL R Men',
+    description: 'Galerie photos : transformations, institut, evenements',
   },
 };
 

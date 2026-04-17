@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   useGalleryItems,
   useCreateGalleryItem,
@@ -10,6 +11,15 @@ import {
 } from '@/queries/useGallery';
 import { GalleryForm } from '@/components/gallery/GalleryForm';
 import type { GalleryItem } from '@kpil/shared';
+
+interface GalleryFormData {
+  categoryId: string;
+  type: 'single' | 'before_after';
+  title: string;
+  description: string;
+  beforeImage: string;
+  afterImage: string;
+}
 
 type ModalState =
   | { type: 'closed' }
@@ -24,15 +34,33 @@ export default function AdminGaleriePage() {
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
-  const handleCreate = (data: { title: string; description: string; beforeImage: string; afterImage: string }) => {
-    createItem.mutate(data, {
-      onSuccess: () => setModal({ type: 'closed' }),
-    });
+  const handleCreate = (data: GalleryFormData) => {
+    createItem.mutate(
+      {
+        categoryId: data.categoryId,
+        type: data.type,
+        title: data.title,
+        description: data.description || undefined,
+        beforeImage: data.beforeImage,
+        afterImage: data.type === 'before_after' ? data.afterImage : undefined,
+      },
+      { onSuccess: () => setModal({ type: 'closed' }) },
+    );
   };
 
-  const handleUpdate = (id: string, data: { title: string; description: string; beforeImage: string; afterImage: string }) => {
+  const handleUpdate = (id: string, data: GalleryFormData) => {
     updateItem.mutate(
-      { id, dto: data },
+      {
+        id,
+        dto: {
+          categoryId: data.categoryId,
+          type: data.type,
+          title: data.title,
+          description: data.description || undefined,
+          beforeImage: data.beforeImage,
+          afterImage: data.type === 'before_after' ? data.afterImage : undefined,
+        },
+      },
       { onSuccess: () => setModal({ type: 'closed' }) },
     );
   };
@@ -54,13 +82,21 @@ export default function AdminGaleriePage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">
       <div className="flex items-center justify-between">
-        <h1 className="font-montserrat text-3xl font-semibold">Galerie avant/apres</h1>
-        <button
-          onClick={() => setModal({ type: 'create' })}
-          className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
-        >
-          Ajouter
-        </button>
+        <h1 className="font-montserrat text-3xl font-semibold">Galerie</h1>
+        <div className="flex gap-3">
+          <Link
+            href="/admin/galerie/categories"
+            className="border border-bois px-6 py-3 text-sm font-semibold text-bois transition-colors hover:bg-bois-light"
+          >
+            Categories
+          </Link>
+          <button
+            onClick={() => setModal({ type: 'create' })}
+            className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
+          >
+            Ajouter
+          </button>
+        </div>
       </div>
 
       <p className="mt-2 text-sm text-gray">
@@ -84,7 +120,7 @@ export default function AdminGaleriePage() {
                 ) : (
                   <div className="h-20 w-28 rounded bg-bois-light" />
                 )}
-                {item.afterImage ? (
+                {item.type === 'before_after' && item.afterImage ? (
                   <Image
                     src={item.afterImage}
                     alt={`${item.title} - apres`}
@@ -92,17 +128,20 @@ export default function AdminGaleriePage() {
                     height={90}
                     className="h-20 w-28 rounded border border-bois-light object-cover"
                   />
-                ) : (
+                ) : item.type === 'before_after' ? (
                   <div className="h-20 w-28 rounded bg-bois-light" />
-                )}
+                ) : null}
               </div>
 
               {/* Info + Actions */}
               <div className="flex min-w-0 flex-1 items-center justify-between">
                 <div className="min-w-0 flex-1 break-words">
-                  <h2 className="font-montserrat font-semibold">{item.title}</h2>
+                  <div className="flex items-center gap-2">
+                    <h2 className="font-montserrat font-semibold">{item.title}</h2>
+                    <span className="rounded bg-bois-light px-2 py-0.5 text-xs">{item.type === 'before_after' ? 'Avant/Apres' : 'Photo'}</span>
+                  </div>
                   {item.description && (
-                    <p className="mt-1 text-sm text-gray">{item.description}</p>
+                    <p className="mt-1 line-clamp-2 text-sm text-gray">{item.description}</p>
                   )}
                 </div>
 

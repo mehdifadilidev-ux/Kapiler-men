@@ -7,8 +7,9 @@ import { useLogout } from '@/queries/useAuth';
 
 const navLinks = [
   { href: '/admin', label: 'Dashboard' },
+  { href: '/admin/actualites', label: 'Actualites' },
   { href: '/admin/galerie', label: 'Galerie' },
-  { href: '/admin/services', label: 'Prestations' },
+  { href: '/admin/services', label: 'Soins' },
 ];
 
 export function AdminHeader() {

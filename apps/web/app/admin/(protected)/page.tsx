@@ -55,6 +55,14 @@ export default function AdminDashboardPage() {
         </Link>
 
         <Link
+          href="/admin/temoignages"
+          className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
+        >
+          <h2 className="font-montserrat text-xl font-semibold">Temoignages</h2>
+          <p className="mt-2 text-sm text-gray">Gerer les avis clients</p>
+        </Link>
+
+        <Link
           href="/admin/services"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >

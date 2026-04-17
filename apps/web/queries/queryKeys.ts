@@ -14,4 +14,7 @@ export const queryKeys = {
     all: ['services'] as const,
     detail: (id: string) => ['services', id] as const,
   },
+  testimonials: {
+    all: ['testimonials'] as const,
+  },
 } as const;

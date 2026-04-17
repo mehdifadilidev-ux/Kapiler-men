@@ -9,6 +9,7 @@ import { GalleryModule } from './gallery/gallery.module';
 import { GalleryCategoriesModule } from './gallery-categories/gallery-categories.module';
 import { NewsBannerModule } from './news-banner/news-banner.module';
 import { ServicesModule } from './services/services.module';
+import { TestimonialsModule } from './testimonials/testimonials.module';
 import { UploadModule } from './upload/upload.module';
 
 // Initialize Firebase Admin SDK (only once)
@@ -47,6 +48,7 @@ if (getApps().length === 0 && process.env.FIREBASE_STORAGE_BUCKET) {
     GalleryCategoriesModule,
     NewsBannerModule,
     ServicesModule,
+    TestimonialsModule,
     UploadModule,
   ],
 })

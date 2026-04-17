@@ -9,6 +9,7 @@ const navLinks = [
   { href: '/admin', label: 'Dashboard' },
   { href: '/admin/actualites', label: 'Actualites' },
   { href: '/admin/galerie', label: 'Galerie' },
+  { href: '/admin/temoignages', label: 'Temoignages' },
   { href: '/admin/services', label: 'Soins' },
 ];
 

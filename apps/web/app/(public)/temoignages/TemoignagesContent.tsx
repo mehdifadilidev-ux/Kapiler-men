@@ -4,6 +4,30 @@ import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
 import type { Testimonial } from '@kpil/shared';
 
+function TestimonialCard({ item }: { item: Testimonial }) {
+  return (
+    <div className="w-80 shrink-0 border border-bois-light p-8">
+      <p className="font-montserrat text-sm font-semibold">{item.author}</p>
+      <div className="mt-2 flex gap-0.5">
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            className={i < item.rating ? 'text-bois' : 'text-gray/30'}
+          >
+            &#9733;
+          </span>
+        ))}
+        {item.source !== 'other' && (
+          <span className="ml-2 text-xs text-gray">{item.source}</span>
+        )}
+      </div>
+      <p className="mt-4 leading-relaxed text-gray">
+        &laquo; {item.text} &raquo;
+      </p>
+    </div>
+  );
+}
+
 export function TemoignagesContent() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,32 +52,20 @@ export function TemoignagesContent() {
         </p>
       </div>
 
-      <section className="mx-auto mt-16 max-w-4xl">
+      <section className="mt-16">
         {loading ? (
           <p className="text-center text-gray">Chargement...</p>
         ) : testimonials.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2">
-            {testimonials.map((item) => (
-              <div key={item.id} className="border border-bois-light p-8">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <span
-                      key={i}
-                      className={i < item.rating ? 'text-bois' : 'text-gray/30'}
-                    >
-                      &#9733;
-                    </span>
-                  ))}
-                </div>
-                <p className="mt-4 leading-relaxed text-gray">
-                  &laquo; {item.text} &raquo;
-                </p>
-                <div className="mt-6 flex items-center justify-between">
-                  <p className="font-montserrat text-sm font-semibold">{item.author}</p>
-                  <span className="text-xs text-gray">{item.source === 'other' ? '' : item.source}</span>
-                </div>
-              </div>
-            ))}
+          <div className="overflow-hidden">
+            <div className="animate-scroll flex gap-8">
+              {testimonials.map((item) => (
+                <TestimonialCard key={item.id} item={item} />
+              ))}
+              {/* Duplicate for seamless infinite loop */}
+              {testimonials.map((item) => (
+                <TestimonialCard key={`dup-${item.id}`} item={item} />
+              ))}
+            </div>
           </div>
         ) : (
           <p className="text-center text-gray">Les temoignages seront bientot disponibles.</p>

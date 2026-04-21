@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     type: 'website',
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'light',
+  themeColor: '#FFFFFF',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

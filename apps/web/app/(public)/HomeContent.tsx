@@ -23,7 +23,7 @@ export function HomeContent() {
     '@type': 'HairSalon',
     name: "KPIL'R Men",
     description: 'Prothesiste capillaire specialise dans les transformations naturelles pour homme. Institut prive a Orleans.',
-    url: 'https://www.kpilrmen.fr',
+    url: 'https://kpilr-men.fr',
     telephone: '+33666972562',
     email: 'kpilr-men@outlook.fr',
     address: {

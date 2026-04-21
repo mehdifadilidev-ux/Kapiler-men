@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.kpilrmen.fr'),
+  metadataBase: new URL('https://kpilr-men.fr'),
   title: {
     default: 'KPIL R Men — Prothesiste capillaire',
     template: '%s | KPIL R Men',

@@ -13,9 +13,17 @@ export class ApiRequestError extends Error {
 }
 
 async function parseJson<T>(response: Response): Promise<T> {
-  // res.json() returns Promise<any> by Web API design.
+  if (response.status === 204 || response.headers.get('content-length') === '0') {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse('null');
+  }
+  const text = await response.text();
+  if (!text) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse('null');
+  }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return response.json();
+  return JSON.parse(text);
 }
 
 function decodeAdminFromToken(token: string): { id: string; email: string } | null {

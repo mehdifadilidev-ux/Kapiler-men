@@ -8,6 +8,8 @@ import {
   useDeleteTestimonial,
   useToggleTestimonialVisibility,
 } from '@/queries/useTestimonials';
+import { useToast } from '@/components/ui/Toast';
+import { getErrorMessage } from '@/lib/errors';
 import type { Testimonial } from '@kpil/shared';
 
 type ModalState =
@@ -27,6 +29,7 @@ export default function AdminTemoignagesPage() {
   const updateTestimonial = useUpdateTestimonial();
   const deleteTestimonial = useDeleteTestimonial();
   const toggleVisibility = useToggleTestimonialVisibility();
+  const toast = useToast();
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
@@ -54,20 +57,49 @@ export default function AdminTemoignagesPage() {
   const handleCreate = () => {
     createTestimonial.mutate(
       { author, text, rating, source },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Temoignage ajoute', 'Le temoignage est desormais disponible.');
+        },
+        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleUpdate = (id: string) => {
     updateTestimonial.mutate(
       { id, dto: { author, text, rating, source } },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Temoignage mis a jour', 'Les modifications ont ete enregistrees.');
+        },
+        onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleDelete = (id: string) => {
     deleteTestimonial.mutate(id, {
-      onSuccess: () => setConfirmDelete(null),
+      onSuccess: () => {
+        setConfirmDelete(null);
+        toast.success('Temoignage supprime', 'Le temoignage a ete retire de la liste.');
+      },
+      onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
+    });
+  };
+
+  const handleToggleVisibility = (id: string, isVisible: boolean) => {
+    toggleVisibility.mutate(id, {
+      onSuccess: () =>
+        toast.success(
+          isVisible ? 'Temoignage masque' : 'Temoignage affiche',
+          isVisible
+            ? 'Il n’apparait plus sur le site public.'
+            : 'Il est desormais visible sur le site public.',
+        ),
+      onError: (err) => toast.error('Action impossible', getErrorMessage(err)),
     });
   };
 
@@ -123,7 +155,7 @@ export default function AdminTemoignagesPage() {
 
               <div className="flex shrink-0 gap-4">
                 <button
-                  onClick={() => toggleVisibility.mutate(item.id)}
+                  onClick={() => handleToggleVisibility(item.id, item.isVisible)}
                   disabled={toggleVisibility.isPending}
                   className="text-sm text-bois hover:underline disabled:opacity-50"
                 >

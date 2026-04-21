@@ -8,6 +8,8 @@ import {
   useDeleteNewsBanner,
   useActivateNewsBanner,
 } from '@/queries/useNewsBanner';
+import { useToast } from '@/components/ui/Toast';
+import { getErrorMessage } from '@/lib/errors';
 import type { NewsBanner } from '@kpil/shared';
 
 type ModalState =
@@ -21,6 +23,7 @@ export default function AdminActualitesPage() {
   const updateBanner = useUpdateNewsBanner();
   const deleteBanner = useDeleteNewsBanner();
   const activateBanner = useActivateNewsBanner();
+  const toast = useToast();
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
@@ -45,20 +48,43 @@ export default function AdminActualitesPage() {
   const handleCreate = () => {
     createBanner.mutate(
       { text, link: link || undefined, type: bannerType },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Banniere creee', 'La banniere a ete ajoutee.');
+        },
+        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleUpdate = (id: string) => {
     updateBanner.mutate(
       { id, dto: { text, link: link || undefined, type: bannerType } },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Banniere mise a jour', 'Les modifications ont ete enregistrees.');
+        },
+        onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleDelete = (id: string) => {
     deleteBanner.mutate(id, {
-      onSuccess: () => setConfirmDelete(null),
+      onSuccess: () => {
+        setConfirmDelete(null);
+        toast.success('Banniere supprimee', 'La banniere a ete retiree.');
+      },
+      onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
+    });
+  };
+
+  const handleActivate = (id: string) => {
+    activateBanner.mutate(id, {
+      onSuccess: () => toast.success('Banniere activee', 'Elle s’affiche desormais sur le site.'),
+      onError: (err) => toast.error('Activation impossible', getErrorMessage(err)),
     });
   };
 
@@ -110,7 +136,7 @@ export default function AdminActualitesPage() {
               <div className="flex shrink-0 gap-4">
                 {!banner.isActive && (
                   <button
-                    onClick={() => activateBanner.mutate(banner.id)}
+                    onClick={() => handleActivate(banner.id)}
                     disabled={activateBanner.isPending}
                     className="text-sm text-green-600 hover:underline disabled:opacity-50"
                   >

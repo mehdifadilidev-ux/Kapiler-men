@@ -4,11 +4,22 @@ import { useState } from 'react';
 import { ImageUpload } from '@/components/ui/ImageUpload';
 import type { Service } from '@kpil/shared';
 
+const SERVICE_SECTIONS = [
+  'Image masculine - Barbe & Visage',
+  'Diagnostic & Bilan capillaire',
+  'Transformations capillaires',
+  'Entretien du complement',
+  'Renouvellements',
+] as const;
+
 interface ServiceFormData {
   title: string;
+  description: string;
   image: string;
   features: string[];
   price: number | undefined;
+  duration: string;
+  section: string;
 }
 
 interface ServiceFormProps {
@@ -20,10 +31,13 @@ interface ServiceFormProps {
 
 export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceFormProps) {
   const [title, setTitle] = useState(item?.title ?? '');
+  const [description, setDescription] = useState(item?.description ?? '');
   const [image, setImage] = useState(item?.image ?? '');
   const [features, setFeatures] = useState<string[]>(item?.features ?? []);
   const [newFeature, setNewFeature] = useState('');
   const [price, setPrice] = useState(item?.price ? String(item.price) : '');
+  const [duration, setDuration] = useState(item?.duration ?? '');
+  const [section, setSection] = useState(item?.section ?? '');
 
   const canSubmit = title.trim() && !isPending;
 
@@ -50,9 +64,12 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
     if (!canSubmit) return;
     onSubmit({
       title: title.trim(),
+      description: description.trim(),
       image,
       features,
       price: price ? parseFloat(price) : undefined,
+      duration: duration.trim(),
+      section: section.trim(),
     });
   };
 
@@ -64,6 +81,26 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
         </h2>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+          {/* Section */}
+          <div>
+            <label htmlFor="service-section" className="block text-sm font-medium">
+              Section
+            </label>
+            <select
+              id="service-section"
+              value={section}
+              onChange={(e) => setSection(e.target.value)}
+              className="mt-1 w-full border border-gray/30 bg-white px-4 py-3 text-sm focus:border-bois focus:outline-none"
+            >
+              <option value="">&mdash; Aucune &mdash;</option>
+              {SERVICE_SECTIONS.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Titre */}
           <div>
             <label htmlFor="service-title" className="block text-sm font-medium">
@@ -80,8 +117,23 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
             />
           </div>
 
+          {/* Description */}
+          <div>
+            <label htmlFor="service-desc" className="block text-sm font-medium">
+              Note / description (optionnel)
+            </label>
+            <textarea
+              id="service-desc"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={2}
+              className="mt-1 w-full resize-none border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
+              placeholder="Ex: Transformation realisee apres diagnostic capillaire..."
+            />
+          </div>
+
           {/* Image */}
-          <ImageUpload label="Image de la prestation" value={image} onChange={setImage} />
+          <ImageUpload label="Image de la prestation (optionnel)" value={image} onChange={setImage} />
 
           {/* Features */}
           <div>
@@ -127,21 +179,36 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
             </div>
           </div>
 
-          {/* Prix */}
-          <div>
-            <label htmlFor="service-price" className="block text-sm font-medium">
-              Prix (&euro;)
-            </label>
-            <input
-              id="service-price"
-              type="number"
-              step="0.01"
-              min="0"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
-              placeholder="Ex: 450"
-            />
+          {/* Prix + Durée */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="service-price" className="block text-sm font-medium">
+                Prix (&euro;)
+              </label>
+              <input
+                id="service-price"
+                type="number"
+                step="0.01"
+                min="0"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
+                placeholder="Ex: 450"
+              />
+            </div>
+            <div>
+              <label htmlFor="service-duration" className="block text-sm font-medium">
+                Duree
+              </label>
+              <input
+                id="service-duration"
+                type="text"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
+                placeholder="Ex: 2 h 40"
+              />
+            </div>
           </div>
 
           {/* Actions */}

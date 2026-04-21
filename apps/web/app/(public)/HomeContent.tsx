@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
+import { BOOKING_URL } from '@/lib/constants';
 import type { Service, GalleryItem, NewsBanner } from '@kpil/shared';
 
 export function HomeContent() {
@@ -89,12 +90,14 @@ export function HomeContent() {
             >
               En savoir plus
             </Link>
-            <Link
-              href="/rendez-vous"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-bois px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
             >
               Rendez-vous
-            </Link>
+            </a>
           </div>
         </section>
 
@@ -133,7 +136,7 @@ export function HomeContent() {
                     href="/soins"
                     className="group overflow-hidden border border-bois-light transition-colors hover:bg-bois-light"
                   >
-                    {service.image ? (
+                    {service.image && (
                       <div className="relative h-48 w-full">
                         <Image
                           src={service.image}
@@ -143,8 +146,6 @@ export function HomeContent() {
                           className="object-cover transition-transform group-hover:scale-105"
                         />
                       </div>
-                    ) : (
-                      <div className="h-48 w-full bg-bois-light" />
                     )}
                     <div className="p-6 text-center">
                       <h3 className="font-montserrat text-lg font-semibold">{service.title}</h3>
@@ -259,12 +260,14 @@ export function HomeContent() {
           <p className="mt-4 text-gray">
             Consultation personnalisee pour definir la solution ideale.
           </p>
-          <Link
-            href="/rendez-vous"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-10 inline-block bg-bois px-10 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
           >
             Rendez-vous
-          </Link>
+          </a>
         </section>
       </main>
     </>

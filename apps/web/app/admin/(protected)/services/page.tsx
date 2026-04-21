@@ -9,6 +9,8 @@ import {
   useDeleteService,
 } from '@/queries/useServices';
 import { ServiceForm } from '@/components/services/ServiceForm';
+import { useToast } from '@/components/ui/Toast';
+import { getErrorMessage } from '@/lib/errors';
 import type { Service } from '@kpil/shared';
 
 type ModalState =
@@ -21,26 +23,62 @@ export default function AdminServicesPage() {
   const createService = useCreateService();
   const updateService = useUpdateService();
   const deleteService = useDeleteService();
+  const toast = useToast();
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
-  const handleCreate = (data: { title: string; image: string; features: string[]; price: number | undefined }) => {
+  const handleCreate = (data: { title: string; description: string; image: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
     createService.mutate(
-      { title: data.title, image: data.image || undefined, features: data.features, price: data.price },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        title: data.title,
+        description: data.description || undefined,
+        image: data.image || undefined,
+        features: data.features,
+        price: data.price,
+        duration: data.duration || undefined,
+        section: data.section || undefined,
+      },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Prestation creee', 'La prestation est disponible sur le site.');
+        },
+        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+      },
     );
   };
 
-  const handleUpdate = (id: string, data: { title: string; image: string; features: string[]; price: number | undefined }) => {
+  const handleUpdate = (id: string, data: { title: string; description: string; image: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
     updateService.mutate(
-      { id, dto: { title: data.title, image: data.image || undefined, features: data.features, price: data.price } },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        id,
+        dto: {
+          title: data.title,
+          description: data.description || undefined,
+          image: data.image || undefined,
+          features: data.features,
+          price: data.price,
+          duration: data.duration || undefined,
+          section: data.section || undefined,
+        },
+      },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Prestation mise a jour', 'Les modifications ont ete enregistrees.');
+        },
+        onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleDelete = (id: string) => {
     deleteService.mutate(id, {
-      onSuccess: () => setConfirmDelete(null),
+      onSuccess: () => {
+        setConfirmDelete(null);
+        toast.success('Prestation supprimee', 'La prestation a ete retiree.');
+      },
+      onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
   };
 

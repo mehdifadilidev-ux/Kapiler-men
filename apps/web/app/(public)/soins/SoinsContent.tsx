@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { apiClient } from '@/lib/api-client';
+import { BOOKING_URL } from '@/lib/constants';
 import type { Service } from '@kpil/shared';
 
 export function SoinsContent() {
@@ -134,16 +134,24 @@ export function SoinsContent() {
       {/* Liste des soins */}
       <section className="mx-auto mt-20 max-w-5xl">
         <h2 className="mb-12 text-center font-montserrat text-2xl font-semibold">Nos prestations</h2>
-        <div className="space-y-12">
         {loading ? (
           <p className="text-gray">Chargement...</p>
         ) : services.length > 0 ? (
-          services.map((service) => (
-            <div
-              key={service.id}
-              className="overflow-hidden border border-bois-light md:flex"
-            >
-              {service.image ? (
+          groupBySection(services).map(([sectionName, sectionServices]) => (
+            <div key={sectionName || 'autres'} className="mt-16 first:mt-0">
+              {sectionName && (
+                <div className="mb-8">
+                  <span className="block h-0.5 w-12 bg-bois" />
+                  <h3 className="mt-4 font-montserrat text-xl font-semibold">{sectionName}</h3>
+                </div>
+              )}
+              <div className="space-y-10">
+                {sectionServices.map((service) =>
+                  service.image ? (
+              <div
+                key={service.id}
+                className="overflow-hidden border border-bois-light md:flex"
+              >
                 <div className="relative h-64 md:h-auto md:w-80">
                   <Image
                     src={service.image}
@@ -153,61 +161,117 @@ export function SoinsContent() {
                     className="object-cover"
                   />
                 </div>
-              ) : (
-                <div className="h-64 bg-bois-light md:h-auto md:w-80" />
-              )}
 
-              <div className="flex min-w-0 flex-1 flex-col justify-between p-8">
-                <div className="min-w-0 break-words">
-                  <h2 className="font-montserrat text-2xl font-semibold">{service.title}</h2>
+                <div className="flex min-w-0 flex-1 flex-col justify-between p-8">
+                  <div className="min-w-0 break-words">
+                    <h2 className="font-montserrat text-2xl font-semibold">{service.title}</h2>
 
-                  {service.description && (
-                    <p className="mt-3 text-sm leading-relaxed text-gray">{service.description}</p>
-                  )}
+                    {(service.price || service.duration) && (
+                      <div className="mt-3 inline-flex items-center gap-2 bg-bois-light px-3 py-1 text-sm text-bois">
+                        {service.price && <span>{service.price} &euro;</span>}
+                        {service.price && service.duration && <span className="opacity-50">|</span>}
+                        {service.duration && <span>{service.duration}</span>}
+                      </div>
+                    )}
 
-                  {service.features.length > 0 && (
-                    <ul className="mt-6 space-y-2">
-                      {service.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-3 text-sm">
-                          <span className="mt-0.5 text-bois">&#10003;</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                    {service.features.length > 0 && (
+                      <ul className="mt-6 space-y-2">
+                        {service.features.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-3 text-sm">
+                            <span className="mt-0.5 text-bois">&#10003;</span>
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {service.description && (
+                      <p className="mt-4 text-xs italic leading-relaxed text-gray">
+                        {service.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-8 flex justify-end">
+                    <a
+                      href={BOOKING_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-bois px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
+                    >
+                      Prendre rendez-vous
+                    </a>
+                  </div>
                 </div>
+              </div>
+            ) : (
+              <div key={service.id} className="border-l-2 border-bois-light pl-6">
+                <h3 className="font-montserrat text-lg font-semibold text-bois">{service.title}</h3>
 
-                <div className="mt-8 flex items-center justify-between">
-                  {service.price ? (
-                    <p className="text-2xl font-semibold text-bois">{service.price} &euro;</p>
-                  ) : (
-                    <p className="text-sm text-gray">Prix sur devis</p>
-                  )}
-                  <Link
-                    href="/rendez-vous"
-                    className="bg-bois px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
-                  >
-                    Prendre rendez-vous
-                  </Link>
-                </div>
+                {(service.price || service.duration) && (
+                  <div className="mt-2 inline-flex items-center gap-2 bg-bois-light px-3 py-1 text-sm text-bois">
+                    {service.price && <span>{service.price} &euro;</span>}
+                    {service.price && service.duration && <span className="opacity-50">|</span>}
+                    {service.duration && <span>{service.duration}</span>}
+                  </div>
+                )}
+
+                {service.features.length > 0 && (
+                  <ul className="mt-4 space-y-1.5 text-sm text-black">
+                    {service.features.map((feature, index) => (
+                      <li key={index} className="flex gap-2">
+                        <span className="text-bois">&bull;</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {service.description && (
+                  <p className="mt-3 text-xs italic leading-relaxed text-gray">
+                    {service.description}
+                  </p>
+                )}
+              </div>
+            ),
+                )}
               </div>
             </div>
           ))
         ) : (
           <p className="text-gray">Les soins seront bientot disponibles.</p>
         )}
-        </div>
       </section>
 
       {/* CTA */}
       <section className="mt-20 text-center">
-        <Link
-          href="/rendez-vous"
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block bg-bois px-10 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
         >
           Prendre rendez-vous
-        </Link>
+        </a>
       </section>
     </main>
   );
+}
+
+function groupBySection(services: Service[]): [string, Service[]][] {
+  const groups = new Map<string, Service[]>();
+  for (const service of services) {
+    const key = service.section?.trim() ?? '';
+    const existing = groups.get(key);
+    if (existing) {
+      existing.push(service);
+    } else {
+      groups.set(key, [service]);
+    }
+  }
+  const unsectioned = groups.get('');
+  groups.delete('');
+  const result: [string, Service[]][] = unsectioned ? [['', unsectioned]] : [];
+  for (const entry of groups) result.push(entry);
+  return result;
 }

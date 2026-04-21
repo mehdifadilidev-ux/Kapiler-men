@@ -10,6 +10,7 @@ interface ServiceRow {
   features: string[];
   duration: string | null;
   price: string | null;
+  section: string | null;
   is_active: boolean;
   position: number;
   created_at: Date;
@@ -24,6 +25,7 @@ export interface ServiceResponse {
   features: string[];
   duration: string | null;
   price: string | null;
+  section: string | null;
   isActive: boolean;
   position: number;
   createdAt: string;
@@ -39,6 +41,7 @@ function toResponse(row: ServiceRow): ServiceResponse {
     features: row.features ?? [],
     duration: row.duration,
     price: row.price,
+    section: row.section,
     isActive: row.is_active,
     position: row.position,
     createdAt: row.created_at.toISOString(),
@@ -83,7 +86,7 @@ export class ServicesService {
     const nextPosition = (maxPos?.max ?? -1) + 1;
 
     const [item] = await this.db.sql<ServiceRow[]>`
-      INSERT INTO services (title, description, image, features, duration, price, is_active, position)
+      INSERT INTO services (title, description, image, features, duration, price, section, is_active, position)
       VALUES (
         ${dto.title},
         ${dto.description ?? null},
@@ -91,6 +94,7 @@ export class ServicesService {
         ${dto.features ?? []},
         ${dto.duration ?? null},
         ${dto.price ?? null},
+        ${dto.section ?? null},
         ${dto.isActive ?? true},
         ${nextPosition}
       )
@@ -121,6 +125,7 @@ export class ServicesService {
         features = ${dto.features ?? existing.features},
         duration = ${dto.duration ?? existing.duration},
         price = ${dto.price ?? existing.price},
+        section = ${dto.section ?? existing.section},
         is_active = ${dto.isActive ?? existing.is_active},
         updated_at = NOW()
       WHERE id = ${id}

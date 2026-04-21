@@ -7,6 +7,7 @@ export const createServiceSchema = z.object({
   features: z.array(z.string().min(1)).optional(),
   duration: z.string().max(50).optional(),
   price: z.number().positive().optional(),
+  section: z.string().max(255).optional(),
   isActive: z.boolean().optional(),
 });
 
@@ -20,6 +21,7 @@ export const serviceSchema = createServiceSchema.extend({
   id: z.string().uuid(),
   image: z.string().url().nullable(),
   features: z.array(z.string()),
+  section: z.string().nullable(),
   isActive: z.boolean(),
   position: z.number().int(),
   createdAt: z.string().datetime(),

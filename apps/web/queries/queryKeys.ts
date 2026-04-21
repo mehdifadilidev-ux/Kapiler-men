@@ -3,9 +3,6 @@ export const queryKeys = {
     all: ['gallery'] as const,
     detail: (id: string) => ['gallery', id] as const,
   },
-  galleryCategories: {
-    all: ['gallery-categories'] as const,
-  },
   newsBanner: {
     all: ['news-banner'] as const,
     active: ['news-banner', 'active'] as const,

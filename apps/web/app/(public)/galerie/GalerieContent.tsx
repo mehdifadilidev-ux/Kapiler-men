@@ -3,64 +3,24 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
-import type { GalleryItem, GalleryCategory } from '@kpil/shared';
+import type { GalleryItem } from '@kpil/shared';
 
 export function GalerieContent() {
   const [items, setItems] = useState<GalleryItem[]>([]);
-  const [categories, setCategories] = useState<GalleryCategory[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     apiClient
-      .get<GalleryCategory[]>('/gallery/categories')
-      .then(setCategories)
-      .catch(() => setCategories([]));
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    const endpoint = activeCategory ? `/gallery?category=${activeCategory}` : '/gallery';
-    apiClient
-      .get<GalleryItem[]>(endpoint)
+      .get<GalleryItem[]>('/gallery')
       .then(setItems)
       .catch(() => setItems([]))
       .finally(() => setLoading(false));
-  }, [activeCategory]);
+  }, []);
 
   return (
     <main className="mx-auto max-w-6xl overflow-hidden px-6 py-24">
       <h1 className="font-montserrat text-4xl font-semibold">Galerie</h1>
       <p className="mt-4 text-gray">Decouvrez nos realisations en images.</p>
-
-      {/* Category filters */}
-      {categories.length > 0 && (
-        <div className="mt-8 flex flex-wrap gap-3">
-          <button
-            onClick={() => setActiveCategory(null)}
-            className={`px-4 py-2 text-sm font-medium transition-colors ${
-              activeCategory === null
-                ? 'bg-bois text-white'
-                : 'border border-bois-light text-gray hover:bg-bois-light'
-            }`}
-          >
-            Tout
-          </button>
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.slug)}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${
-                activeCategory === cat.slug
-                  ? 'bg-bois text-white'
-                  : 'border border-bois-light text-gray hover:bg-bois-light'
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
-      )}
 
       <div className="mt-16 space-y-10">
         {loading ? (

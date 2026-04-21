@@ -5,7 +5,7 @@ import type { CreateGalleryDto, UpdateGalleryDto, ReorderGalleryDto } from '@kpi
 
 interface GalleryRow {
   id: string;
-  category_id: string;
+  category_id: string | null;
   type: 'single' | 'before_after';
   title: string;
   description: string | null;
@@ -18,7 +18,7 @@ interface GalleryRow {
 
 export interface GalleryResponse {
   id: string;
-  categoryId: string;
+  categoryId: string | null;
   type: 'single' | 'before_after';
   title: string;
   description: string | null;
@@ -82,14 +82,14 @@ export class GalleryService {
 
   async create(dto: CreateGalleryDto): Promise<GalleryResponse> {
     const [maxPos] = await this.db.sql<{ max: number | null }[]>`
-      SELECT MAX(position) as max FROM gallery_items WHERE category_id = ${dto.categoryId}
+      SELECT MAX(position) as max FROM gallery_items
     `;
     const nextPosition = (maxPos?.max ?? -1) + 1;
 
     const [item] = await this.db.sql<GalleryRow[]>`
       INSERT INTO gallery_items (category_id, type, title, description, before_image, after_image, position)
       VALUES (
-        ${dto.categoryId},
+        ${dto.categoryId ?? null},
         ${dto.type ?? 'before_after'},
         ${dto.title},
         ${dto.description ?? null},

@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 import { ImageUpload } from '@/components/ui/ImageUpload';
-import { useGalleryCategories } from '@/queries/useGalleryCategories';
 import type { GalleryItem } from '@kpil/shared';
 
 interface GalleryFormData {
-  categoryId: string;
   type: 'single' | 'before_after';
   title: string;
   description: string;
@@ -22,8 +20,6 @@ interface GalleryFormProps {
 }
 
 export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryFormProps) {
-  const { data: categories } = useGalleryCategories();
-  const [categoryId, setCategoryId] = useState(item?.categoryId ?? '');
   const [type, setType] = useState<'single' | 'before_after'>(item?.type ?? 'before_after');
   const [title, setTitle] = useState(item?.title ?? '');
   const [description, setDescription] = useState(item?.description ?? '');
@@ -32,7 +28,6 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
 
   const canSubmit =
     title.trim() &&
-    categoryId &&
     beforeImage &&
     (type === 'single' || afterImage) &&
     !isPending;
@@ -41,7 +36,6 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
     e.preventDefault();
     if (!canSubmit) return;
     onSubmit({
-      categoryId,
       type,
       title: title.trim(),
       description: description.trim(),
@@ -58,27 +52,6 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
         </h2>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          {/* Category */}
-          <div>
-            <label htmlFor="gallery-category" className="block text-sm font-medium">
-              Categorie
-            </label>
-            <select
-              id="gallery-category"
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
-              required
-              className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
-            >
-              <option value="">Selectionner une categorie</option>
-              {categories?.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* Type */}
           <div>
             <label className="block text-sm font-medium">Type</label>

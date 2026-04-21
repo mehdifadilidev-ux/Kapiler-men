@@ -43,15 +43,7 @@ export default function AdminDashboardPage() {
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
           <h2 className="font-montserrat text-xl font-semibold">Galerie</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les photos par categorie</p>
-        </Link>
-
-        <Link
-          href="/admin/galerie/categories"
-          className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
-        >
-          <h2 className="font-montserrat text-xl font-semibold">Categories galerie</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les categories de la galerie</p>
+          <p className="mt-2 text-sm text-gray">Gerer les photos de la galerie</p>
         </Link>
 
         <Link

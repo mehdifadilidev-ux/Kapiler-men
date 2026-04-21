@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const GALLERY_ITEM_TYPES = ['single', 'before_after'] as const;
 
 export const createGallerySchema = z.object({
-  categoryId: z.string().uuid(),
+  categoryId: z.string().uuid().optional(),
   type: z.enum(GALLERY_ITEM_TYPES).default('before_after'),
   title: z.string().min(1).max(255),
   description: z.string().optional(),
@@ -20,7 +20,7 @@ export type UpdateGalleryDto = z.infer<typeof updateGallerySchema>;
 
 export const galleryItemSchema = z.object({
   id: z.string().uuid(),
-  categoryId: z.string().uuid(),
+  categoryId: z.string().uuid().nullable(),
   type: z.enum(GALLERY_ITEM_TYPES),
   title: z.string(),
   description: z.string().nullable(),

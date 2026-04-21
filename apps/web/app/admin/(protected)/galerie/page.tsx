@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   useGalleryItems,
   useCreateGalleryItem,
@@ -10,10 +9,11 @@ import {
   useDeleteGalleryItem,
 } from '@/queries/useGallery';
 import { GalleryForm } from '@/components/gallery/GalleryForm';
+import { useToast } from '@/components/ui/Toast';
+import { getErrorMessage } from '@/lib/errors';
 import type { GalleryItem } from '@kpil/shared';
 
 interface GalleryFormData {
-  categoryId: string;
   type: 'single' | 'before_after';
   title: string;
   description: string;
@@ -31,20 +31,26 @@ export default function AdminGaleriePage() {
   const createItem = useCreateGalleryItem();
   const updateItem = useUpdateGalleryItem();
   const deleteItem = useDeleteGalleryItem();
+  const toast = useToast();
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
   const handleCreate = (data: GalleryFormData) => {
     createItem.mutate(
       {
-        categoryId: data.categoryId,
         type: data.type,
         title: data.title,
         description: data.description || undefined,
         beforeImage: data.beforeImage,
         afterImage: data.type === 'before_after' ? data.afterImage : undefined,
       },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Element ajoute', 'La photo a ete ajoutee a la galerie.');
+        },
+        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+      },
     );
   };
 
@@ -53,7 +59,6 @@ export default function AdminGaleriePage() {
       {
         id,
         dto: {
-          categoryId: data.categoryId,
           type: data.type,
           title: data.title,
           description: data.description || undefined,
@@ -61,13 +66,23 @@ export default function AdminGaleriePage() {
           afterImage: data.type === 'before_after' ? data.afterImage : undefined,
         },
       },
-      { onSuccess: () => setModal({ type: 'closed' }) },
+      {
+        onSuccess: () => {
+          setModal({ type: 'closed' });
+          toast.success('Element mis a jour', 'Les modifications ont ete enregistrees.');
+        },
+        onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
+      },
     );
   };
 
   const handleDelete = (id: string) => {
     deleteItem.mutate(id, {
-      onSuccess: () => setConfirmDelete(null),
+      onSuccess: () => {
+        setConfirmDelete(null);
+        toast.success('Element supprime', 'La photo a ete retiree de la galerie.');
+      },
+      onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
   };
 
@@ -83,20 +98,12 @@ export default function AdminGaleriePage() {
     <div className="mx-auto max-w-4xl px-6 py-12">
       <div className="flex items-center justify-between">
         <h1 className="font-montserrat text-3xl font-semibold">Galerie</h1>
-        <div className="flex gap-3">
-          <Link
-            href="/admin/galerie/categories"
-            className="border border-bois px-6 py-3 text-sm font-semibold text-bois transition-colors hover:bg-bois-light"
-          >
-            Categories
-          </Link>
-          <button
-            onClick={() => setModal({ type: 'create' })}
-            className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
-          >
-            Ajouter
-          </button>
-        </div>
+        <button
+          onClick={() => setModal({ type: 'create' })}
+          className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
+        >
+          Ajouter
+        </button>
       </div>
 
       <p className="mt-2 text-sm text-gray">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BOOKING_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -135,12 +136,14 @@ export default function ContactPage() {
 
         {/* CTA */}
         <section className="mt-16 text-center">
-          <Link
-            href="/rendez-vous"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-bois px-10 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
           >
             Prendre rendez-vous
-          </Link>
+          </a>
         </section>
       </div>
     </main>

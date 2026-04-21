@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { BOOKING_URL } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/presentation', label: 'Presentation' },
   { href: '/soins', label: 'Soins' },
   { href: '/galerie', label: 'Galerie' },
   { href: '/contact', label: 'Contact' },
-  { href: '/rendez-vous', label: 'Rendez-vous' },
 ] as const;
 
 const HOURS = [
@@ -51,6 +51,14 @@ export function Footer() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium transition-colors hover:text-bois"
+              >
+                Rendez-vous
+              </a>
             </nav>
           </div>
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { BOOKING_URL } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
@@ -46,12 +47,14 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/rendez-vous"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-bois px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
           >
             Rendez-vous
-          </Link>
+          </a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -89,13 +92,15 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/rendez-vous"
+            <a
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="mt-2 bg-bois px-6 py-3 text-center text-xs font-semibold uppercase tracking-widest text-white"
             >
               Rendez-vous
-            </Link>
+            </a>
           </div>
         </nav>
       )}

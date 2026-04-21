@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { BOOKING_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Presentation',
@@ -119,12 +119,14 @@ export default function PresentationPage() {
           Chaque homme beneficie d&apos;un moment personnel, d&apos;une ecoute attentive et
           d&apos;un accompagnement precis dans un cadre raffine et rassurant.
         </p>
-        <Link
-          href="/rendez-vous"
+        <a
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-10 inline-block bg-bois px-10 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
         >
           Prendre rendez-vous
-        </Link>
+        </a>
       </section>
     </main>
   );

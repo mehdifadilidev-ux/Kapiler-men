@@ -56,17 +56,24 @@ export function TemoignagesContent() {
         {loading ? (
           <p className="text-center text-gray">Chargement...</p>
         ) : testimonials.length > 0 ? (
-          <div className="overflow-hidden">
-            <div className="animate-scroll flex gap-8">
+          testimonials.length < 4 ? (
+            <div className="flex flex-wrap justify-center gap-8">
               {testimonials.map((item) => (
                 <TestimonialCard key={item.id} item={item} />
               ))}
-              {/* Duplicate for seamless infinite loop */}
-              {testimonials.map((item) => (
-                <TestimonialCard key={`dup-${item.id}`} item={item} />
-              ))}
             </div>
-          </div>
+          ) : (
+            <div className="overflow-hidden">
+              <div className="animate-scroll flex w-max gap-8">
+                {testimonials.map((item) => (
+                  <TestimonialCard key={item.id} item={item} />
+                ))}
+                {testimonials.map((item) => (
+                  <TestimonialCard key={`dup-${item.id}`} item={item} />
+                ))}
+              </div>
+            </div>
+          )
         ) : (
           <p className="text-center text-gray">Les temoignages seront bientot disponibles.</p>
         )}

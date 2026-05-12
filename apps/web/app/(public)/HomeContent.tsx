@@ -5,24 +5,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
 import { BOOKING_URL } from '@/lib/constants';
-import type { Service, GalleryItem, NewsBanner } from '@kpil/shared';
+import type { Service, GalleryItem, NewsBanner, PartnerBrand } from '@kpil/shared';
 
 export function HomeContent() {
   const [services, setServices] = useState<Service[]>([]);
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [banner, setBanner] = useState<NewsBanner | null>(null);
+  const [brands, setBrands] = useState<PartnerBrand[]>([]);
 
   useEffect(() => {
     apiClient.get<Service[]>('/services').then(setServices).catch(() => setServices([]));
     apiClient.get<GalleryItem[]>('/gallery').then(setGalleryItems).catch(() => setGalleryItems([]));
     apiClient.get<NewsBanner | null>('/news-banner').then(setBanner).catch(() => setBanner(null));
+    apiClient.get<PartnerBrand[]>('/partner-brands').then(setBrands).catch(() => setBrands([]));
   }, []);
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'HairSalon',
     name: "KPIL'R Men",
-    description: 'Prothesiste capillaire specialise dans les transformations naturelles pour homme. Institut prive a Orleans.',
+    description: 'Prothesiste capillaire specialise dans les transformations naturelles pour homme. Institut privé à Orleans.',
     url: 'https://kpilr-men.fr',
     telephone: '+33666972562',
     email: 'kpilr-men@outlook.fr',
@@ -81,7 +83,7 @@ export function HomeContent() {
           </p>
           <p className="mt-4 max-w-lg text-sm text-gray">
             Vous etes au bon endroit. Nous proposons des solutions naturelles et sur mesure.
-            KPIL&apos;R Men est un espace prive entierement dedie a l&apos;homme et a son image.
+            KPIL&apos;R Men est un espace privé entièrement dedié à l&apos;homme et a son image.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
@@ -249,6 +251,41 @@ export function HomeContent() {
           </div>
         </section>
 
+        {/* Marques partenaires */}
+        {brands.length > 0 && (
+          <section className="px-6 py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center">
+                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
+                  Nos partenaires
+                </p>
+                <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
+                  Marques partenaires
+                </h2>
+              </div>
+
+              {brands.length < 4 ? (
+                <div className="mt-16 flex flex-wrap items-center justify-center gap-12">
+                  {brands.map((brand) => (
+                    <PartnerBrandLogo key={brand.id} brand={brand} />
+                  ))}
+                </div>
+              ) : (
+                <div className="mt-16 overflow-hidden">
+                  <div className="animate-scroll flex w-max items-center gap-16">
+                    {brands.map((brand) => (
+                      <PartnerBrandLogo key={brand.id} brand={brand} />
+                    ))}
+                    {brands.map((brand) => (
+                      <PartnerBrandLogo key={`dup-${brand.id}`} brand={brand} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
         {/* CTA Final */}
         <section className="bg-black px-6 py-24 text-center text-white">
           <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
@@ -281,6 +318,36 @@ function PlaceholderCard({ title }: { title: string }) {
       <p className="mt-3 text-sm text-gray">Details bientot disponibles.</p>
     </div>
   );
+}
+
+function PartnerBrandLogo({ brand }: { brand: PartnerBrand }) {
+  const content = (
+    <div className="relative h-20 w-40 grayscale transition-all duration-300 hover:grayscale-0">
+      <Image
+        src={brand.logo}
+        alt={brand.name}
+        fill
+        sizes="160px"
+        className="object-contain"
+      />
+    </div>
+  );
+
+  if (brand.website) {
+    return (
+      <Link
+        href={brand.website}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={brand.name}
+        className="shrink-0"
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className="shrink-0">{content}</div>;
 }
 
 function GalleryPlaceholder() {

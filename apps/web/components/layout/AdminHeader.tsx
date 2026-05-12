@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/admin/galerie', label: 'Galerie' },
   { href: '/admin/temoignages', label: 'Temoignages' },
   { href: '/admin/services', label: 'Soins' },
+  { href: '/admin/marques', label: 'Marques' },
 ];
 
 export function AdminHeader() {

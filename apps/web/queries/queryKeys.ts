@@ -7,6 +7,9 @@ export const queryKeys = {
     all: ['news-banner'] as const,
     active: ['news-banner', 'active'] as const,
   },
+  partnerBrands: {
+    all: ['partner-brands'] as const,
+  },
   services: {
     all: ['services'] as const,
     detail: (id: string) => ['services', id] as const,

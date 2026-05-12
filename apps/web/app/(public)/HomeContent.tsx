@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
 import { BOOKING_URL } from '@/lib/constants';
+import { useOverflowScroll } from '@/lib/useOverflowScroll';
 import type { Service, GalleryItem, NewsBanner, PartnerBrand } from '@kpil/shared';
 
 export function HomeContent() {
@@ -71,7 +72,7 @@ export function HomeContent() {
         )}
 
         {/* Hero */}
-        <section className="flex min-h-[90vh] flex-col items-center justify-center px-6 text-center">
+        <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 text-center">
           <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
             Prothesiste capillaire
           </p>
@@ -101,6 +102,20 @@ export function HomeContent() {
               Rendez-vous
             </a>
           </div>
+
+          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-gray">
+            <span className="animate-scroll-hint text-xs uppercase tracking-[0.4em]">Decouvrir</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="h-5 w-5 animate-scroll-hint"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </section>
 
         {/* A propos */}
@@ -119,20 +134,20 @@ export function HomeContent() {
         </section>
 
         {/* Apercu soins */}
-        <section className="px-6 py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
-                Nos soins
-              </p>
-              <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
-                Soins
-              </h2>
-            </div>
+        {services.length > 0 && (
+          <section className="px-6 py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center">
+                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
+                  Nos soins
+                </p>
+                <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
+                  Soins
+                </h2>
+              </div>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
-              {services.length > 0 ? (
-                services.slice(0, 3).map((service) => (
+              <div className="mt-16 grid gap-8 md:grid-cols-3">
+                {services.slice(0, 3).map((service) => (
                   <Link
                     key={service.id}
                     href="/soins"
@@ -162,40 +177,34 @@ export function HomeContent() {
                       )}
                     </div>
                   </Link>
-                ))
-              ) : (
-                <>
-                  <PlaceholderCard title="Transformation Essentielle" />
-                  <PlaceholderCard title="Transformation Signature" />
-                  <PlaceholderCard title="Entretien & Suivi" />
-                </>
-              )}
-            </div>
+                ))}
+              </div>
 
-            <div className="mt-12 text-center">
-              <Link
-                href="/soins"
-                className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
-              >
-                Voir tous les soins
-              </Link>
+              <div className="mt-12 text-center">
+                <Link
+                  href="/soins"
+                  className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
+                >
+                  Voir tous les soins
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Galerie */}
-        <section className="bg-bois-light px-6 py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Resultats</p>
-              <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
-                Galerie
-              </h2>
-            </div>
+        {galleryItems.length > 0 && (
+          <section className="bg-bois-light px-6 py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center">
+                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Resultats</p>
+                <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
+                  Galerie
+                </h2>
+              </div>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
-              {galleryItems.length > 0 ? (
-                galleryItems.slice(0, 3).map((item) => (
+              <div className="mt-16 grid gap-8 md:grid-cols-3">
+                {galleryItems.slice(0, 3).map((item) => (
                   <div key={item.id} className="space-y-3 bg-white p-6">
                     {item.type === 'before_after' && item.afterImage ? (
                       <div className="grid grid-cols-2 gap-3">
@@ -230,26 +239,20 @@ export function HomeContent() {
                       {item.title}
                     </p>
                   </div>
-                ))
-              ) : (
-                <>
-                  <GalleryPlaceholder />
-                  <GalleryPlaceholder />
-                  <GalleryPlaceholder />
-                </>
-              )}
-            </div>
+                ))}
+              </div>
 
-            <div className="mt-12 text-center">
-              <Link
-                href="/galerie"
-                className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
-              >
-                Voir la galerie complete
-              </Link>
+              <div className="mt-12 text-center">
+                <Link
+                  href="/galerie"
+                  className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
+                >
+                  Voir la galerie complete
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Marques partenaires */}
         {brands.length > 0 && (
@@ -264,24 +267,7 @@ export function HomeContent() {
                 </h2>
               </div>
 
-              {brands.length < 4 ? (
-                <div className="mt-16 flex flex-wrap items-center justify-center gap-12">
-                  {brands.map((brand) => (
-                    <PartnerBrandLogo key={brand.id} brand={brand} />
-                  ))}
-                </div>
-              ) : (
-                <div className="mt-16 overflow-hidden">
-                  <div className="animate-scroll flex w-max items-center gap-16">
-                    {brands.map((brand) => (
-                      <PartnerBrandLogo key={brand.id} brand={brand} />
-                    ))}
-                    {brands.map((brand) => (
-                      <PartnerBrandLogo key={`dup-${brand.id}`} brand={brand} />
-                    ))}
-                  </div>
-                </div>
-              )}
+              <PartnerBrandsRow brands={brands} />
             </div>
           </section>
         )}
@@ -311,25 +297,46 @@ export function HomeContent() {
   );
 }
 
-function PlaceholderCard({ title }: { title: string }) {
+function PartnerBrandsRow({ brands }: { brands: PartnerBrand[] }) {
+  const { containerRef, contentRef, shouldScroll } = useOverflowScroll(brands.length);
+
   return (
-    <div className="border border-bois-light p-8 text-center">
-      <h3 className="font-montserrat text-lg font-semibold">{title}</h3>
-      <p className="mt-3 text-sm text-gray">Details bientot disponibles.</p>
+    <div ref={containerRef} className="mt-16 overflow-hidden">
+      <div
+        ref={contentRef}
+        className={
+          shouldScroll
+            ? 'animate-scroll flex w-max items-start gap-16'
+            : 'flex items-start justify-center gap-16'
+        }
+      >
+        {brands.map((brand) => (
+          <PartnerBrandLogo key={brand.id} brand={brand} />
+        ))}
+        {shouldScroll &&
+          brands.map((brand) => (
+            <PartnerBrandLogo key={`dup-${brand.id}`} brand={brand} />
+          ))}
+      </div>
     </div>
   );
 }
 
 function PartnerBrandLogo({ brand }: { brand: PartnerBrand }) {
   const content = (
-    <div className="relative h-20 w-40 grayscale transition-all duration-300 hover:grayscale-0">
-      <Image
-        src={brand.logo}
-        alt={brand.name}
-        fill
-        sizes="160px"
-        className="object-contain"
-      />
+    <div className="group flex flex-col items-center gap-3">
+      <div className="relative h-20 w-40 grayscale transition-all duration-300 group-hover:grayscale-0">
+        <Image
+          src={brand.logo}
+          alt={brand.name}
+          fill
+          sizes="160px"
+          className="object-contain"
+        />
+      </div>
+      <p className="text-center text-xs font-medium uppercase tracking-widest text-gray">
+        {brand.name}
+      </p>
     </div>
   );
 
@@ -350,14 +357,3 @@ function PartnerBrandLogo({ brand }: { brand: PartnerBrand }) {
   return <div className="shrink-0">{content}</div>;
 }
 
-function GalleryPlaceholder() {
-  return (
-    <div className="space-y-3 bg-white p-6">
-      <div className="grid grid-cols-2 gap-3">
-        <div className="aspect-[4/3] bg-bois-light" />
-        <div className="aspect-[4/3] bg-bois-light" />
-      </div>
-      <p className="text-center text-sm text-gray">Avant / Apres</p>
-    </div>
-  );
-}

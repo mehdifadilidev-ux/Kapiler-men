@@ -2,7 +2,33 @@
 
 import { useEffect, useState } from 'react';
 import { apiClient } from '@/lib/api-client';
+import { useOverflowScroll } from '@/lib/useOverflowScroll';
 import type { Testimonial } from '@kpil/shared';
+
+function TestimonialsRow({ testimonials }: { testimonials: Testimonial[] }) {
+  const { containerRef, contentRef, shouldScroll } = useOverflowScroll(testimonials.length);
+
+  return (
+    <div ref={containerRef} className="overflow-hidden">
+      <div
+        ref={contentRef}
+        className={
+          shouldScroll
+            ? 'animate-scroll flex w-max gap-8'
+            : 'flex justify-center gap-8'
+        }
+      >
+        {testimonials.map((item) => (
+          <TestimonialCard key={item.id} item={item} />
+        ))}
+        {shouldScroll &&
+          testimonials.map((item) => (
+            <TestimonialCard key={`dup-${item.id}`} item={item} />
+          ))}
+      </div>
+    </div>
+  );
+}
 
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
@@ -56,24 +82,7 @@ export function TemoignagesContent() {
         {loading ? (
           <p className="text-center text-gray">Chargement...</p>
         ) : testimonials.length > 0 ? (
-          testimonials.length < 4 ? (
-            <div className="flex flex-wrap justify-center gap-8">
-              {testimonials.map((item) => (
-                <TestimonialCard key={item.id} item={item} />
-              ))}
-            </div>
-          ) : (
-            <div className="overflow-hidden">
-              <div className="animate-scroll flex w-max gap-8">
-                {testimonials.map((item) => (
-                  <TestimonialCard key={item.id} item={item} />
-                ))}
-                {testimonials.map((item) => (
-                  <TestimonialCard key={`dup-${item.id}`} item={item} />
-                ))}
-              </div>
-            </div>
-          )
+          <TestimonialsRow testimonials={testimonials} />
         ) : (
           <p className="text-center text-gray">Les temoignages seront bientot disponibles.</p>
         )}

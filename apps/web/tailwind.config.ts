@@ -22,11 +22,16 @@ const config: Config = {
       },
       animation: {
         scroll: 'scroll 30s linear infinite',
+        'scroll-hint': 'scroll-hint 2s ease-in-out infinite',
       },
       keyframes: {
         scroll: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
+        },
+        'scroll-hint': {
+          '0%, 100%': { transform: 'translateY(0)', opacity: '0.6' },
+          '50%': { transform: 'translateY(8px)', opacity: '1' },
         },
       },
     },

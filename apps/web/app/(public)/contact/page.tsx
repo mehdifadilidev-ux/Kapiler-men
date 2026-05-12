@@ -44,7 +44,12 @@ export default function ContactPage() {
             accueilli a la fois.
           </p>
           <p>
-            L&apos;accueil a l&apos;institut se fait personnellement a l&apos;heure du rendez-vous.
+            L&apos;acces a l&apos;institut se fait uniquement en notre presence. A votre arrivee,
+            merci de nous appeler au{' '}
+            <a href="tel:+33666972562" className="font-semibold text-bois hover:underline">
+              06 66 97 25 62
+            </a>{' '}
+            afin que nous venions vous ouvrir personnellement.
           </p>
           <p>
             Merci de respecter l&apos;horaire convenu afin d&apos;assurer le bon deroulement des

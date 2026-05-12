@@ -47,11 +47,15 @@ export default function AdminMarquesPage() {
     setModal({ type: 'edit', item });
   };
 
-  const buildDto = () => ({
-    name,
-    logo,
-    ...(website ? { website } : {}),
-  });
+  const buildDto = () => {
+    const trimmed = website.trim();
+    const normalizedWebsite = trimmed && !/^https?:\/\//i.test(trimmed) ? `https://${trimmed}` : trimmed;
+    return {
+      name,
+      logo,
+      ...(normalizedWebsite ? { website: normalizedWebsite } : {}),
+    };
+  };
 
   const handleCreate = () => {
     createBrand.mutate(buildDto(), {

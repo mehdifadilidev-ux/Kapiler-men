@@ -20,7 +20,7 @@ export function GalerieContent() {
   return (
     <main className="mx-auto max-w-6xl overflow-hidden px-6 py-24">
       <h1 className="font-montserrat text-4xl font-semibold">Galerie</h1>
-      <p className="mt-4 text-gray">Decouvrez nos realisations en images.</p>
+      <p className="mt-4 text-gray">Découvrez nos réalisations en images.</p>
 
       <div className="mt-16 space-y-10">
         {loading ? (
@@ -45,11 +45,11 @@ export function GalerieContent() {
                   </div>
                   <div className="relative">
                     <span className="absolute left-4 top-4 z-10 bg-bois px-3 py-1 text-xs font-medium uppercase tracking-widest text-white">
-                      Apres
+                      Après
                     </span>
                     <Image
                       src={item.afterImage}
-                      alt={`${item.title} - apres`}
+                      alt={`${item.title} - après`}
                       width={700}
                       height={500}
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -78,13 +78,13 @@ export function GalerieContent() {
             </div>
           ))
         ) : (
-          <p className="text-gray">La galerie sera bientot alimentee.</p>
+          <p className="text-gray">La galerie sera bientôt alimentée.</p>
         )}
       </div>
 
       {/* Social links */}
       <div className="mt-16 text-center">
-        <p className="text-sm text-gray">Suivez-nous pour plus de resultats</p>
+        <p className="text-sm text-gray">Suivez-nous pour plus de résultats</p>
         <div className="mt-4 flex justify-center gap-6">
           <a
             href="https://www.instagram.com/kpilr_men/"

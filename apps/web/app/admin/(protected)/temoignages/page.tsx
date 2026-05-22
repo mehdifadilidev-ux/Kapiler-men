@@ -60,9 +60,9 @@ export default function AdminTemoignagesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Temoignage ajoute', 'Le temoignage est desormais disponible.');
+          toast.success('Témoignage ajouté', 'Le témoignage est désormais disponible.');
         },
-        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+        onError: (err) => toast.error('Création impossible', getErrorMessage(err)),
       },
     );
   };
@@ -73,7 +73,7 @@ export default function AdminTemoignagesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Temoignage mis a jour', 'Les modifications ont ete enregistrees.');
+          toast.success('Témoignage mis à jour', 'Les modifications ont été enregistrées.');
         },
         onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
       },
@@ -84,7 +84,7 @@ export default function AdminTemoignagesPage() {
     deleteTestimonial.mutate(id, {
       onSuccess: () => {
         setConfirmDelete(null);
-        toast.success('Temoignage supprime', 'Le temoignage a ete retire de la liste.');
+        toast.success('Témoignage supprimé', 'Le témoignage a été retiré de la liste.');
       },
       onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
@@ -94,10 +94,10 @@ export default function AdminTemoignagesPage() {
     toggleVisibility.mutate(id, {
       onSuccess: () =>
         toast.success(
-          isVisible ? 'Temoignage masque' : 'Temoignage affiche',
+          isVisible ? 'Témoignage masqué' : 'Témoignage affiché',
           isVisible
-            ? 'Il n’apparait plus sur le site public.'
-            : 'Il est desormais visible sur le site public.',
+            ? 'Il n’apparaît plus sur le site public.'
+            : 'Il est désormais visible sur le site public.',
         ),
       onError: (err) => toast.error('Action impossible', getErrorMessage(err)),
     });
@@ -114,7 +114,7 @@ export default function AdminTemoignagesPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">
       <div className="flex items-center justify-between">
-        <h1 className="font-montserrat text-3xl font-semibold">Temoignages</h1>
+        <h1 className="font-montserrat text-3xl font-semibold">Témoignages</h1>
         <button
           onClick={openCreate}
           className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
@@ -124,7 +124,7 @@ export default function AdminTemoignagesPage() {
       </div>
 
       <p className="mt-2 text-sm text-gray">
-        {testimonials?.length ?? 0} temoignage{(testimonials?.length ?? 0) > 1 ? 's' : ''}
+        {testimonials?.length ?? 0} témoignage{(testimonials?.length ?? 0) > 1 ? 's' : ''}
       </p>
 
       <div className="mt-10 divide-y divide-bois-light">
@@ -140,7 +140,7 @@ export default function AdminTemoignagesPage() {
                       item.isVisible ? 'text-green-600' : 'text-gray'
                     }`}
                   >
-                    {item.isVisible ? 'Visible' : 'Masque'}
+                    {item.isVisible ? 'Visible' : 'Masqué'}
                   </span>
                 </div>
                 <div className="mt-1 flex gap-0.5">
@@ -196,7 +196,7 @@ export default function AdminTemoignagesPage() {
           ))
         ) : (
           <div className="py-16 text-center">
-            <p className="text-gray">Aucun temoignage.</p>
+            <p className="text-gray">Aucun témoignage.</p>
             <button
               onClick={openCreate}
               className="mt-4 text-sm font-semibold text-bois underline underline-offset-4"
@@ -212,12 +212,12 @@ export default function AdminTemoignagesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="w-full max-w-lg bg-white p-8">
             <h2 className="font-montserrat text-xl font-semibold">
-              {modal.type === 'create' ? 'Nouveau temoignage' : 'Modifier le temoignage'}
+              {modal.type === 'create' ? 'Nouveau témoignage' : 'Modifier le témoignage'}
             </h2>
 
             <div className="mt-6 space-y-4">
               <div>
-                <label className="text-sm font-medium">Prenom / Nom</label>
+                <label className="text-sm font-medium">Prénom / Nom</label>
                 <input
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
@@ -233,7 +233,7 @@ export default function AdminTemoignagesPage() {
                   onChange={(e) => setText(e.target.value)}
                   rows={4}
                   className="mt-1 w-full border border-bois-light px-4 py-2 text-sm"
-                  placeholder="Texte du temoignage..."
+                  placeholder="Texte du témoignage..."
                 />
               </div>
 

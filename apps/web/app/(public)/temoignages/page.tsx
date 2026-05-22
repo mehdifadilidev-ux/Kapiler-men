@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { TemoignagesContent } from './TemoignagesContent';
 
 export const metadata: Metadata = {
-  title: 'Temoignages',
+  title: 'Témoignages',
   description:
-    'Decouvrez les avis de nos clients. Ils nous ont fait confiance pour leur transformation capillaire.',
+    'Découvrez les avis de nos clients. Ils nous ont fait confiance pour leur transformation capillaire.',
   openGraph: {
-    title: 'Temoignages | KPIL R Men',
+    title: 'Témoignages | KPIL R Men',
     description: 'Les avis de nos clients',
   },
 };

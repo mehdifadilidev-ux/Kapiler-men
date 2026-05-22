@@ -7,10 +7,10 @@ import { useLogout } from '@/queries/useAuth';
 
 const navLinks = [
   { href: '/admin', label: 'Dashboard' },
-  { href: '/admin/actualites', label: 'Actualites' },
+  { href: '/admin/actualites', label: 'Actualités' },
   { href: '/admin/galerie', label: 'Galerie' },
-  { href: '/admin/temoignages', label: 'Temoignages' },
-  { href: '/admin/services', label: 'Soins' },
+  { href: '/admin/temoignages', label: 'Témoignages' },
+  { href: '/admin/services', label: 'Prestations' },
   { href: '/admin/marques', label: 'Marques' },
 ];
 
@@ -50,7 +50,7 @@ export function AdminHeader() {
           disabled={logout.isPending}
           className="text-sm text-gray transition-colors hover:text-red-600 disabled:opacity-50"
         >
-          Deconnexion
+          Déconnexion
         </button>
       </div>
     </header>

@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { BOOKING_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Presentation',
+  title: 'Présentation',
   description:
-    "Decouvrez KPIL'R Men, institut de prothese capillaire pour homme a Orleans. Un savoir-faire au service de votre image.",
+    "Découvrez KPIL'R Men, institut de prothèse capillaire pour homme à Orléans. Un savoir-faire au service de votre image.",
   openGraph: {
-    title: 'Presentation | KPIL R Men',
-    description: 'Institut de prothese capillaire pour homme a Orleans',
+    title: 'Présentation | KPIL R Men',
+    description: 'Institut de prothèse capillaire pour homme à Orléans',
   },
 };
 
@@ -16,12 +16,12 @@ export default function PresentationPage() {
     <main className="px-6 py-24">
       {/* Intro */}
       <section className="mx-auto max-w-4xl text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Presentation</p>
+        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Présentation</p>
         <h1 className="mt-6 font-montserrat text-4xl font-semibold md:text-5xl">
           Un savoir-faire au service de votre image
         </h1>
         <p className="mt-6 font-bodoni text-xl italic text-gray">
-          Des solutions adaptees a chaque homme.
+          Des solutions adaptées à chaque homme.
         </p>
       </section>
 
@@ -29,17 +29,17 @@ export default function PresentationPage() {
       <section className="mx-auto mt-24 max-w-4xl">
         <h2 className="font-montserrat text-2xl font-semibold">Le concept</h2>
         <p className="mt-6 leading-relaxed text-gray">
-          Une des seules professionnelles de la coiffure a proposer des solutions capillaires souvent
-          vendues comme de simples perruques. L&apos;idee ici est de fournir un soin complet :
+          Une des seules professionnelles de la coiffure à proposer des solutions capillaires souvent
+          vendues comme de simples perruques. L&apos;idée ici est de fournir un soin complet :
         </p>
         <ul className="mt-6 space-y-3 text-gray">
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>Une ecoute, un accompagnement personnalise</span>
+            <span>Une écoute, un accompagnement personnalisé</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>Une prothese naturelle, discrete et adaptee aux besoins et aux budgets</span>
+            <span>Une prothèse naturelle, discrète et adaptée aux besoins et aux budgets</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
@@ -47,23 +47,23 @@ export default function PresentationPage() {
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>Un suivi de qualite et une adaptation constante</span>
+            <span>Un suivi de qualité et une adaptation constante</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>Le tout dans une discretion totale et un environnement privilegie</span>
+            <span>Le tout dans une discrétion totale et un environnement privilégié</span>
           </li>
         </ul>
         <p className="mt-6 leading-relaxed text-gray">
-          Au centre du concept : proposer des solutions en prothese capillaire adaptees a chacun,
-          qu&apos;elles soient standards ou personnalisees, selon les besoins, le mode de vie et les
+          Au centre du concept : proposer des solutions en prothèse capillaire adaptées à chacun,
+          qu&apos;elles soient standards ou personnalisées, selon les besoins, le mode de vie et les
           attentes. L&apos;objectif n&apos;est pas d&apos;imposer, mais de conseiller et
           d&apos;accompagner avec justesse.
         </p>
         <p className="mt-4 leading-relaxed text-gray">
           Parce que l&apos;image masculine est un ensemble harmonieux, l&apos;accompagnement peut
-          inclure la mise en valeur de la barbe et des soins du visage cibles, afin d&apos;assurer
-          une coherence globale.
+          inclure la mise en valeur de la barbe et des soins du visage ciblés, afin d&apos;assurer
+          une cohérence globale.
         </p>
       </section>
 
@@ -72,28 +72,28 @@ export default function PresentationPage() {
         <div className="mx-auto max-w-4xl">
           <h2 className="font-montserrat text-2xl font-semibold">Le lieu</h2>
           <p className="mt-6 leading-relaxed text-gray">
-            Pense comme un lieu intime et confidentiel, l&apos;institut est loin de l&apos;agitation
-            d&apos;un salon traditionnel. Chaque rendez-vous se deroule dans une atmosphere elegante
-            et apaisante, inspiree d&apos;un univers barber revisite.
+            Pensé comme un lieu intime et confidentiel, l&apos;institut est loin de l&apos;agitation
+            d&apos;un salon traditionnel. Chaque rendez-vous se déroule dans une atmosphère élégante
+            et apaisante, inspirée d&apos;un univers barber revisité.
           </p>
           <p className="mt-4 leading-relaxed text-gray">
-            Les tons blanc, noir et bois naturel creent un equilibre entre modernite, sobriete et
-            chaleur, renforce par une lumiere douce qui accompagne chaque moment de soin.
+            Les tons blanc, noir et bois naturel créent un équilibre entre modernité, sobriété et
+            chaleur, renforcé par une lumière douce qui accompagne chaque moment de soin.
           </p>
         </div>
       </section>
 
       {/* La gerante */}
       <section className="mx-auto mt-20 max-w-4xl">
-        <h2 className="font-montserrat text-2xl font-semibold">La gerante</h2>
+        <h2 className="font-montserrat text-2xl font-semibold">La gérante</h2>
         <p className="mt-6 leading-relaxed text-gray">
-          Forte de 23 ans d&apos;experience dans la coiffure, elle a toujours eu a coeur
-          d&apos;evoluer et d&apos;affiner son expertise. Au fil des annees, elle a identifie les
-          besoins specifiques des hommes : discretion, ecoute, comprehension et solutions reellement
-          adaptees.
+          Forte de 23 ans d&apos;expérience dans la coiffure, elle a toujours eu à c&oelig;ur
+          d&apos;évoluer et d&apos;affiner son expertise. Au fil des années, elle a identifié les
+          besoins spécifiques des hommes : discrétion, écoute, compréhension et solutions réellement
+          adaptées.
         </p>
         <p className="mt-4 leading-relaxed text-gray">
-          C&apos;est cette vision qui l&apos;a conduite a creer KPIL&apos;R Men.
+          C&apos;est cette vision qui l&apos;a conduite à créer KPIL&apos;R Men.
         </p>
       </section>
 
@@ -102,10 +102,10 @@ export default function PresentationPage() {
         <div className="mx-auto max-w-4xl">
           <h2 className="font-montserrat text-2xl font-semibold">Les produits</h2>
           <p className="mt-6 leading-relaxed text-gray">
-            L&apos;exigence passe aussi par le choix des produits : des gammes composees a 98%
-            d&apos;ingredients d&apos;origine naturelle. Ils sont selectionnes soigneusement pour
-            respecter la peau, preserver le cuir chevelu et proteger le complement capillaire. Tout
-            en etant pratiques d&apos;utilisation pour l&apos;entretien au quotidien.
+            L&apos;exigence passe aussi par le choix des produits : des gammes composées à 98%
+            d&apos;ingrédients d&apos;origine naturelle. Ils sont sélectionnés soigneusement pour
+            respecter la peau, préserver le cuir chevelu et protéger le complément capillaire. Tout
+            en étant pratiques d&apos;utilisation pour l&apos;entretien au quotidien.
           </p>
           <p className="mt-4 leading-relaxed text-gray">
             Les partenaires sont clairs et transparents pour assurer une confiance totale.
@@ -116,8 +116,8 @@ export default function PresentationPage() {
       {/* Conclusion */}
       <section className="mx-auto mt-20 max-w-4xl text-center">
         <p className="font-bodoni text-xl italic leading-relaxed text-gray">
-          Chaque homme beneficie d&apos;un moment personnel, d&apos;une ecoute attentive et
-          d&apos;un accompagnement precis dans un cadre raffine et rassurant.
+          Chaque homme bénéficie d&apos;un moment personnel, d&apos;une écoute attentive et
+          d&apos;un accompagnement précis dans un cadre raffiné et rassurant.
         </p>
         <a
           href={BOOKING_URL}

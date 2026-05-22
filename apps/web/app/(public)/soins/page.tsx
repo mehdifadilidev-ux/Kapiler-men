@@ -4,7 +4,7 @@ import { SoinsContent } from './SoinsContent';
 export const metadata: Metadata = {
   title: 'Soins',
   description:
-    'Decouvrez nos soins capillaires : protheses, complements, entretien. Resultats naturels garantis.',
+    'Découvrez nos soins capillaires : prothèses, compléments, entretien. Résultats naturels garantis.',
   openGraph: {
     title: 'Soins | KPIL R Men',
     description: 'Soins capillaires sur mesure',

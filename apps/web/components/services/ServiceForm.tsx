@@ -8,7 +8,7 @@ const SERVICE_SECTIONS = [
   'Image masculine - Barbe & Visage',
   'Diagnostic & Bilan capillaire',
   'Transformations capillaires',
-  'Entretien du complement',
+  'Entretien du complément',
   'Renouvellements',
 ] as const;
 
@@ -128,7 +128,7 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
               className="mt-1 w-full resize-none border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
-              placeholder="Ex: Transformation realisee apres diagnostic capillaire..."
+              placeholder="Ex: Transformation réalisée après diagnostic capillaire..."
             />
           </div>
 
@@ -198,7 +198,7 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
             </div>
             <div>
               <label htmlFor="service-duration" className="block text-sm font-medium">
-                Duree
+                Durée
               </label>
               <input
                 id="service-duration"

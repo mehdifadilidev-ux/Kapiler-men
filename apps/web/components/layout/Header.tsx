@@ -8,9 +8,9 @@ import { BOOKING_URL } from '@/lib/constants';
 
 const NAV_LINKS = [
   { href: '/', label: 'Accueil' },
-  { href: '/presentation', label: 'Presentation' },
-  { href: '/soins', label: 'Soins' },
-  { href: '/temoignages', label: 'Temoignages' },
+  { href: '/presentation', label: 'Présentation' },
+  { href: '/soins', label: 'Prestations' },
+  { href: '/temoignages', label: 'Témoignages' },
   { href: '/galerie', label: 'Galerie' },
   { href: '/contact', label: 'Contact' },
 ] as const;

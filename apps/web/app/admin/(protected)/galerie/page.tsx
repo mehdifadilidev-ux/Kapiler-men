@@ -47,9 +47,9 @@ export default function AdminGaleriePage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Element ajoute', 'La photo a ete ajoutee a la galerie.');
+          toast.success('Élément ajouté', 'La photo a été ajoutée à la galerie.');
         },
-        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+        onError: (err) => toast.error('Création impossible', getErrorMessage(err)),
       },
     );
   };
@@ -69,7 +69,7 @@ export default function AdminGaleriePage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Element mis a jour', 'Les modifications ont ete enregistrees.');
+          toast.success('Élément mis à jour', 'Les modifications ont été enregistrées.');
         },
         onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
       },
@@ -80,7 +80,7 @@ export default function AdminGaleriePage() {
     deleteItem.mutate(id, {
       onSuccess: () => {
         setConfirmDelete(null);
-        toast.success('Element supprime', 'La photo a ete retiree de la galerie.');
+        toast.success('Élément supprimé', 'La photo a été retirée de la galerie.');
       },
       onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
@@ -107,7 +107,7 @@ export default function AdminGaleriePage() {
       </div>
 
       <p className="mt-2 text-sm text-gray">
-        {items?.length ?? 0} element{(items?.length ?? 0) > 1 ? 's' : ''}
+        {items?.length ?? 0} élément{(items?.length ?? 0) > 1 ? 's' : ''}
       </p>
 
       <div className="mt-10 divide-y divide-bois-light">
@@ -130,7 +130,7 @@ export default function AdminGaleriePage() {
                 {item.type === 'before_after' && item.afterImage ? (
                   <Image
                     src={item.afterImage}
-                    alt={`${item.title} - apres`}
+                    alt={`${item.title} - après`}
                     width={120}
                     height={90}
                     className="h-20 w-28 rounded border border-bois-light object-cover"
@@ -145,7 +145,7 @@ export default function AdminGaleriePage() {
                 <div className="min-w-0 flex-1 break-words">
                   <div className="flex items-center gap-2">
                     <h2 className="font-montserrat font-semibold">{item.title}</h2>
-                    <span className="rounded bg-bois-light px-2 py-0.5 text-xs">{item.type === 'before_after' ? 'Avant/Apres' : 'Photo'}</span>
+                    <span className="rounded bg-bois-light px-2 py-0.5 text-xs">{item.type === 'before_after' ? 'Avant/Après' : 'Photo'}</span>
                   </div>
                   {item.description && (
                     <p className="mt-1 line-clamp-2 text-sm text-gray">{item.description}</p>
@@ -189,7 +189,7 @@ export default function AdminGaleriePage() {
           ))
         ) : (
           <div className="py-16 text-center">
-            <p className="text-gray">Aucun element dans la galerie.</p>
+            <p className="text-gray">Aucun élément dans la galerie.</p>
             <button
               onClick={() => setModal({ type: 'create' })}
               className="mt-4 text-sm font-semibold text-bois underline underline-offset-4"

@@ -47,7 +47,7 @@ export default function RendezVousPage() {
     <main className="mx-auto max-w-4xl px-6 py-24">
       <h1 className="font-montserrat text-4xl font-semibold">Prendre rendez-vous</h1>
       <p className="mt-4 text-gray">
-        Choisissez votre soin et reservez directement en ligne.
+        Choisissez votre soin et réservez directement en ligne.
       </p>
       <div ref={containerRef} className="mt-12 min-h-[600px]" />
     </main>

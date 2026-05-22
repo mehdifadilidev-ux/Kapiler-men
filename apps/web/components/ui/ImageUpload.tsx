@@ -32,7 +32,7 @@ export function ImageUpload({ label, value, onChange }: ImageUploadProps) {
         onChange(result.publicUrl);
       },
       onError: () => {
-        setError('Erreur lors de l\'upload. Verifiez votre connexion.');
+        setError('Erreur lors de l\'upload. Vérifiez votre connexion.');
       },
     });
   };

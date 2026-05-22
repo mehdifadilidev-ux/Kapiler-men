@@ -41,9 +41,9 @@ export default function AdminServicesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Prestation creee', 'La prestation est disponible sur le site.');
+          toast.success('Prestation créée', 'La prestation est disponible sur le site.');
         },
-        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+        onError: (err) => toast.error('Création impossible', getErrorMessage(err)),
       },
     );
   };
@@ -65,7 +65,7 @@ export default function AdminServicesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Prestation mise a jour', 'Les modifications ont ete enregistrees.');
+          toast.success('Prestation mise à jour', 'Les modifications ont été enregistrées.');
         },
         onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
       },
@@ -76,7 +76,7 @@ export default function AdminServicesPage() {
     deleteService.mutate(id, {
       onSuccess: () => {
         setConfirmDelete(null);
-        toast.success('Prestation supprimee', 'La prestation a ete retiree.');
+        toast.success('Prestation supprimée', 'La prestation a été retirée.');
       },
       onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
@@ -139,7 +139,7 @@ export default function AdminServicesPage() {
                   )}
                   {service.features.length > 0 && (
                     <p className="mt-1 text-xs text-gray">
-                      {service.features.length} element{service.features.length > 1 ? 's' : ''} inclus
+                      {service.features.length} élément{service.features.length > 1 ? 's' : ''} inclus
                     </p>
                   )}
                 </div>
@@ -186,7 +186,7 @@ export default function AdminServicesPage() {
               onClick={() => setModal({ type: 'create' })}
               className="mt-4 text-sm font-semibold text-bois underline underline-offset-4"
             >
-              Ajouter la premiere
+              Ajouter la première
             </button>
           </div>
         )}

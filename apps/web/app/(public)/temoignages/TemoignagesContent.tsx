@@ -69,12 +69,12 @@ export function TemoignagesContent() {
   return (
     <main className="px-6 py-24">
       <div className="mx-auto max-w-4xl text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Temoignages</p>
+        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Témoignages</p>
         <h1 className="mt-6 font-montserrat text-4xl font-semibold md:text-5xl">
           Ils nous ont fait confiance
         </h1>
         <p className="mt-6 font-bodoni text-xl italic text-gray">
-          Decouvrez les avis de nos clients.
+          Découvrez les avis de nos clients.
         </p>
       </div>
 
@@ -84,7 +84,7 @@ export function TemoignagesContent() {
         ) : testimonials.length > 0 ? (
           <TestimonialsRow testimonials={testimonials} />
         ) : (
-          <p className="text-center text-gray">Les temoignages seront bientot disponibles.</p>
+          <p className="text-center text-gray">Les témoignages seront bientôt disponibles.</p>
         )}
       </section>
     </main>

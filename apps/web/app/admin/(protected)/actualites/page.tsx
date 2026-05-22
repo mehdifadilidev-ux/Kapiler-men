@@ -51,9 +51,9 @@ export default function AdminActualitesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Banniere creee', 'La banniere a ete ajoutee.');
+          toast.success('Bannière créée', 'La bannière a été ajoutée.');
         },
-        onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+        onError: (err) => toast.error('Création impossible', getErrorMessage(err)),
       },
     );
   };
@@ -64,7 +64,7 @@ export default function AdminActualitesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Banniere mise a jour', 'Les modifications ont ete enregistrees.');
+          toast.success('Bannière mise à jour', 'Les modifications ont été enregistrées.');
         },
         onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
       },
@@ -75,7 +75,7 @@ export default function AdminActualitesPage() {
     deleteBanner.mutate(id, {
       onSuccess: () => {
         setConfirmDelete(null);
-        toast.success('Banniere supprimee', 'La banniere a ete retiree.');
+        toast.success('Bannière supprimée', 'La bannière a été retirée.');
       },
       onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
@@ -83,7 +83,7 @@ export default function AdminActualitesPage() {
 
   const handleActivate = (id: string) => {
     activateBanner.mutate(id, {
-      onSuccess: () => toast.success('Banniere activee', 'Elle s’affiche desormais sur le site.'),
+      onSuccess: () => toast.success('Bannière activée', 'Elle s’affiche désormais sur le site.'),
       onError: (err) => toast.error('Activation impossible', getErrorMessage(err)),
     });
   };
@@ -99,7 +99,7 @@ export default function AdminActualitesPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">
       <div className="flex items-center justify-between">
-        <h1 className="font-montserrat text-3xl font-semibold">Banniere actualites</h1>
+        <h1 className="font-montserrat text-3xl font-semibold">Bannière actualités</h1>
         <button
           onClick={openCreate}
           className="bg-bois px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-bois/90"
@@ -109,7 +109,7 @@ export default function AdminActualitesPage() {
       </div>
 
       <p className="mt-2 text-sm text-gray">
-        {banners?.length ?? 0} banniere{(banners?.length ?? 0) > 1 ? 's' : ''}
+        {banners?.length ?? 0} bannière{(banners?.length ?? 0) > 1 ? 's' : ''}
       </p>
 
       <div className="mt-10 divide-y divide-bois-light">
@@ -178,12 +178,12 @@ export default function AdminActualitesPage() {
           ))
         ) : (
           <div className="py-16 text-center">
-            <p className="text-gray">Aucune banniere.</p>
+            <p className="text-gray">Aucune bannière.</p>
             <button
               onClick={openCreate}
               className="mt-4 text-sm font-semibold text-bois underline underline-offset-4"
             >
-              Creer la premiere
+              Créer la première
             </button>
           </div>
         )}
@@ -194,7 +194,7 @@ export default function AdminActualitesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="w-full max-w-lg bg-white p-8">
             <h2 className="font-montserrat text-xl font-semibold">
-              {modal.type === 'create' ? 'Nouvelle banniere' : 'Modifier la banniere'}
+              {modal.type === 'create' ? 'Nouvelle bannière' : 'Modifier la bannière'}
             </h2>
 
             <div className="mt-6 space-y-4">
@@ -204,7 +204,7 @@ export default function AdminActualitesPage() {
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   className="mt-1 w-full border border-bois-light px-4 py-2 text-sm"
-                  placeholder="Texte de la banniere"
+                  placeholder="Texte de la bannière"
                 />
               </div>
 
@@ -232,7 +232,7 @@ export default function AdminActualitesPage() {
                 >
                   <option value="info">Info</option>
                   <option value="promo">Promo</option>
-                  <option value="event">Evenement</option>
+                  <option value="event">Événement</option>
                 </select>
               </div>
             </div>
@@ -251,7 +251,7 @@ export default function AdminActualitesPage() {
                 disabled={!text || createBanner.isPending || updateBanner.isPending}
                 className="bg-bois px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-bois/90 disabled:opacity-50"
               >
-                {modal.type === 'create' ? 'Creer' : 'Enregistrer'}
+                {modal.type === 'create' ? 'Créer' : 'Enregistrer'}
               </button>
             </div>
           </div>

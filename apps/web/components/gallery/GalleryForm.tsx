@@ -48,7 +48,7 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
       <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto bg-white p-8">
         <h2 className="font-montserrat text-xl font-semibold">
-          {item ? 'Modifier l\'element' : 'Ajouter a la galerie'}
+          {item ? 'Modifier l\'élément' : 'Ajouter à la galerie'}
         </h2>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
@@ -65,7 +65,7 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
                     : 'border-gray/30 hover:bg-bois-light'
                 }`}
               >
-                Avant / Apres
+                Avant / Après
               </button>
               <button
                 type="button"
@@ -113,7 +113,7 @@ export function GalleryForm({ item, onSubmit, onCancel, isPending }: GalleryForm
           {type === 'before_after' ? (
             <div className="grid grid-cols-2 gap-4">
               <ImageUpload label="Photo avant" value={beforeImage} onChange={setBeforeImage} />
-              <ImageUpload label="Photo apres" value={afterImage} onChange={setAfterImage} />
+              <ImageUpload label="Photo après" value={afterImage} onChange={setAfterImage} />
             </div>
           ) : (
             <ImageUpload label="Photo" value={beforeImage} onChange={setBeforeImage} />

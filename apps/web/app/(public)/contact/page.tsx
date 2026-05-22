@@ -5,21 +5,21 @@ import { BOOKING_URL } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    "Contactez KPIL'R Men, institut de prothese capillaire a Orleans. 64 Quai des Augustins, 45100 Orleans.",
+    "Contactez KPIL'R Men, institut de prothèse capillaire à Orléans. 64 Quai des Augustins, 45100 Orléans.",
   openGraph: {
     title: 'Contact | KPIL R Men',
-    description: 'Coordonnees et horaires',
+    description: 'Coordonnées et horaires',
   },
 };
 
 const HOURS = [
   { day: 'Lundi', hours: '9h30 - 19h00' },
   { day: 'Mardi', hours: '9h30 - 16h00' },
-  { day: 'Mercredi', hours: 'Ferme' },
+  { day: 'Mercredi', hours: 'Fermé' },
   { day: 'Jeudi', hours: '9h30 - 19h00' },
   { day: 'Vendredi', hours: '9h30 - 19h00' },
   { day: 'Samedi', hours: '9h00 - 18h00' },
-  { day: 'Dimanche', hours: 'Ferme' },
+  { day: 'Dimanche', hours: 'Fermé' },
 ] as const;
 
 export default function ContactPage() {
@@ -37,14 +37,14 @@ export default function ContactPage() {
         <section className="mx-auto mt-12 max-w-3xl space-y-4 leading-relaxed text-gray">
           <p>
             L&apos;institut KPIL&apos;R Men fonctionne exclusivement sur rendez-vous afin de
-            garantir un accompagnement personnalise et un moment privilegie.
+            garantir un accompagnement personnalisé et un moment privilégié.
           </p>
           <p>
-            Pour des raisons de confidentialite et de qualite de service, un seul client est
-            accueilli a la fois.
+            Pour des raisons de confidentialité et de qualité de service, un seul client est
+            accueilli à la fois.
           </p>
           <p>
-            L&apos;acces a l&apos;institut se fait uniquement en notre presence. A votre arrivee,
+            L&apos;accès à l&apos;institut se fait uniquement en notre présence. À votre arrivée,
             merci de nous appeler au{' '}
             <a href="tel:+33666972562" className="font-semibold text-bois hover:underline">
               06 66 97 25 62
@@ -52,7 +52,7 @@ export default function ContactPage() {
             afin que nous venions vous ouvrir personnellement.
           </p>
           <p>
-            Merci de respecter l&apos;horaire convenu afin d&apos;assurer le bon deroulement des
+            Merci de respecter l&apos;horaire convenu afin d&apos;assurer le bon déroulement des
             rendez-vous suivants.
           </p>
         </section>
@@ -60,15 +60,15 @@ export default function ContactPage() {
         <div className="mt-16 grid gap-12 md:grid-cols-2">
           {/* Coordonnees */}
           <div>
-            <h2 className="font-montserrat text-xl font-semibold">Coordonnees</h2>
+            <h2 className="font-montserrat text-xl font-semibold">Coordonnées</h2>
             <div className="mt-6 space-y-4 text-sm">
               <div>
                 <p className="font-semibold">Adresse</p>
                 <p className="text-gray">64 Quai des Augustins</p>
-                <p className="text-gray">45100 Orleans</p>
+                <p className="text-gray">45100 Orléans</p>
               </div>
               <div>
-                <p className="font-semibold">Telephone</p>
+                <p className="font-semibold">Téléphone</p>
                 <p className="text-gray">06 66 97 25 62</p>
               </div>
               <div>
@@ -113,7 +113,7 @@ export default function ContactPage() {
               {HOURS.map((item) => (
                 <div key={item.day} className="flex justify-between py-3 text-sm">
                   <span className="font-medium">{item.day}</span>
-                  <span className={item.hours === 'Ferme' ? 'text-gray' : ''}>
+                  <span className={item.hours === 'Fermé' ? 'text-gray' : ''}>
                     {item.hours}
                   </span>
                 </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="KPIL'R Men - 64 Quai des Augustins, Orleans"
+              title="KPIL'R Men - 64 Quai des Augustins, Orléans"
             />
           </div>
         </section>

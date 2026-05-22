@@ -4,11 +4,11 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://kpilr-men.fr'),
   title: {
-    default: 'KPIL R Men — Prothesiste capillaire',
+    default: 'KPIL R Men — Prothésiste capillaire',
     template: '%s | KPIL R Men',
   },
   description:
-    'Prothesiste capillaire specialise. Transformations naturelles, complements capillaires sur mesure.',
+    'Prothésiste capillaire spécialisé. Transformations naturelles, compléments capillaires sur mesure.',
   openGraph: {
     siteName: 'KPIL R Men',
     locale: 'fr_FR',

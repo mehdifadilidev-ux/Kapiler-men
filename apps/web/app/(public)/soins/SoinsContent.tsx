@@ -24,14 +24,14 @@ export function SoinsContent() {
       <section className="mx-auto max-w-4xl text-center">
         <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Soins</p>
         <h1 className="mt-6 font-montserrat text-4xl font-semibold md:text-5xl">
-          L&apos;experience KPIL&apos;R MEN
+          L&apos;expérience KPIL&apos;R MEN
         </h1>
         <p className="mt-6 font-bodoni text-xl italic text-gray">
-          Chaque rendez-vous est concu comme un moment privilegie.
+          Chaque rendez-vous est conçu comme un moment privilégié.
         </p>
         <p className="mt-4 leading-relaxed text-gray">
           Le fonctionnement de l&apos;institut repose sur un principe simple : prendre le temps
-          necessaire pour chaque client, dans un environnement calme et discret.
+          nécessaire pour chaque client, dans un environnement calme et discret.
           Un accompagnement sur mesure, respectueux des attentes et du rythme de chacun.
         </p>
       </section>
@@ -39,23 +39,23 @@ export function SoinsContent() {
       {/* Specialite */}
       <section className="mx-auto mt-20 max-w-4xl">
         <h2 className="font-montserrat text-2xl font-semibold">
-          Specialite : la prothese capillaire
+          Spécialité : la prothèse capillaire
         </h2>
         <p className="mt-6 leading-relaxed text-gray">
-          La prothese capillaire permet d&apos;apporter une solution esthetique naturelle face aux
-          problematiques de perte ou de rarefaction des cheveux.
+          La prothèse capillaire permet d&apos;apporter une solution esthétique naturelle face aux
+          problématiques de perte ou de raréfaction des cheveux.
         </p>
         <p className="mt-4 leading-relaxed text-gray">
-          Chaque projet est etudie individuellement afin de determiner :
+          Chaque projet est étudié individuellement afin de déterminer :
         </p>
         <ul className="mt-6 space-y-3 text-gray">
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>La typologie de complement capillaire</span>
+            <span>La typologie de complément capillaire</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>La densite et la texture adaptees</span>
+            <span>La densité et la texture adaptées</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
@@ -63,7 +63,7 @@ export function SoinsContent() {
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
-            <span>La technique de fixation la plus appropriee</span>
+            <span>La technique de fixation la plus appropriée</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="mt-1 text-bois">&#10003;</span>
@@ -71,7 +71,7 @@ export function SoinsContent() {
           </li>
         </ul>
         <p className="mt-6 leading-relaxed text-gray">
-          L&apos;objectif est d&apos;obtenir un resultat discret, harmonieux et confortable au
+          L&apos;objectif est d&apos;obtenir un résultat discret, harmonieux et confortable au
           quotidien.
         </p>
       </section>
@@ -79,14 +79,14 @@ export function SoinsContent() {
       {/* Approche personnalisee */}
       <section className="mt-20 bg-bois-light px-6 py-16">
         <div className="mx-auto max-w-4xl">
-          <h2 className="font-montserrat text-2xl font-semibold">Une approche personnalisee</h2>
+          <h2 className="font-montserrat text-2xl font-semibold">Une approche personnalisée</h2>
           <p className="mt-6 leading-relaxed text-gray">
-            Chaque client beneficie d&apos;un accompagnement base sur :
+            Chaque client bénéficie d&apos;un accompagnement basé sur :
           </p>
           <ul className="mt-6 space-y-3 text-gray">
             <li className="flex items-start gap-3">
               <span className="mt-1 text-bois">&#10003;</span>
-              <span>L&apos;ecoute</span>
+              <span>L&apos;écoute</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-1 text-bois">&#10003;</span>
@@ -98,11 +98,11 @@ export function SoinsContent() {
             </li>
             <li className="flex items-start gap-3">
               <span className="mt-1 text-bois">&#10003;</span>
-              <span>La discretion</span>
+              <span>La discrétion</span>
             </li>
           </ul>
           <p className="mt-6 leading-relaxed text-gray">
-            Afin de proposer la solution la plus adaptee a chaque situation, tout accompagnement
+            Afin de proposer la solution la plus adaptée à chaque situation, tout accompagnement
             commence par un rendez-vous diagnostic.
           </p>
         </div>
@@ -114,15 +114,15 @@ export function SoinsContent() {
         <div className="mt-6 space-y-4 leading-relaxed text-gray">
           <p>Diagnostic obligatoire avant toute validation de transformation capillaire.</p>
           <p>
-            Les tarifs peuvent etre ajustes selon la typologie de prothese capillaire selectionnee.
+            Les tarifs peuvent être ajustés selon la typologie de prothèse capillaire sélectionnée.
           </p>
-          <p>Un acompte de 150 &euro; est demande pour toute transformation capillaire.</p>
+          <p>Un acompte de 150 &euro; est demandé pour toute transformation capillaire.</p>
           <p>
-            La commande de la prothese est effectuee apres validation du devis et encaissement de
+            La commande de la prothèse est effectuée après validation du devis et encaissement de
             l&apos;acompte.
           </p>
           <p>
-            Cet acompte confirme la commande et ne pourra etre rembourse apres validation du devis
+            Cet acompte confirme la commande et ne pourra être remboursé après validation du devis
             et lancement de la commande.
           </p>
           <p className="text-sm italic">
@@ -239,7 +239,7 @@ export function SoinsContent() {
             </div>
           ))
         ) : (
-          <p className="text-gray">Les soins seront bientot disponibles.</p>
+          <p className="text-gray">Les soins seront bientôt disponibles.</p>
         )}
       </section>
 

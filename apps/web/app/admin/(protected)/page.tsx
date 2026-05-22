@@ -12,7 +12,7 @@ export default function AdminDashboardPage() {
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
           <h1 className="font-montserrat text-2xl font-semibold">Espace Admin</h1>
-          <p className="mt-2 text-gray">Vous devez vous connecter pour acceder au dashboard.</p>
+          <p className="mt-2 text-gray">Vous devez vous connecter pour accéder au dashboard.</p>
           <Link
             href="/admin/login"
             className="mt-6 inline-block bg-bois px-6 py-3 text-sm font-semibold text-white"
@@ -34,8 +34,8 @@ export default function AdminDashboardPage() {
           href="/admin/actualites"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
-          <h2 className="font-montserrat text-xl font-semibold">Actualites</h2>
-          <p className="mt-2 text-sm text-gray">Gerer la banniere d&apos;actualites</p>
+          <h2 className="font-montserrat text-xl font-semibold">Actualités</h2>
+          <p className="mt-2 text-sm text-gray">Gérer la bannière d&apos;actualités</p>
         </Link>
 
         <Link
@@ -43,23 +43,23 @@ export default function AdminDashboardPage() {
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
           <h2 className="font-montserrat text-xl font-semibold">Galerie</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les photos de la galerie</p>
+          <p className="mt-2 text-sm text-gray">Gérer les photos de la galerie</p>
         </Link>
 
         <Link
           href="/admin/temoignages"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
-          <h2 className="font-montserrat text-xl font-semibold">Temoignages</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les avis clients</p>
+          <h2 className="font-montserrat text-xl font-semibold">Témoignages</h2>
+          <p className="mt-2 text-sm text-gray">Gérer les avis clients</p>
         </Link>
 
         <Link
           href="/admin/services"
           className="border border-bois-light p-8 transition-colors hover:bg-bois-light"
         >
-          <h2 className="font-montserrat text-xl font-semibold">Soins</h2>
-          <p className="mt-2 text-sm text-gray">Gerer les prestations et tarifs</p>
+          <h2 className="font-montserrat text-xl font-semibold">Prestations</h2>
+          <p className="mt-2 text-sm text-gray">Gérer les prestations et tarifs</p>
         </Link>
       </div>
     </div>

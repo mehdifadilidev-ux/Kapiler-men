@@ -61,9 +61,9 @@ export default function AdminMarquesPage() {
     createBrand.mutate(buildDto(), {
       onSuccess: () => {
         setModal({ type: 'closed' });
-        toast.success('Marque ajoutee', 'La marque est desormais disponible.');
+        toast.success('Marque ajoutée', 'La marque est désormais disponible.');
       },
-      onError: (err) => toast.error('Creation impossible', getErrorMessage(err)),
+      onError: (err) => toast.error('Création impossible', getErrorMessage(err)),
     });
   };
 
@@ -73,7 +73,7 @@ export default function AdminMarquesPage() {
       {
         onSuccess: () => {
           setModal({ type: 'closed' });
-          toast.success('Marque mise a jour', 'Les modifications ont ete enregistrees.');
+          toast.success('Marque mise à jour', 'Les modifications ont été enregistrées.');
         },
         onError: (err) => toast.error('Modification impossible', getErrorMessage(err)),
       },
@@ -84,7 +84,7 @@ export default function AdminMarquesPage() {
     deleteBrand.mutate(id, {
       onSuccess: () => {
         setConfirmDelete(null);
-        toast.success('Marque supprimee', 'La marque a ete retiree de la liste.');
+        toast.success('Marque supprimée', 'La marque a été retirée de la liste.');
       },
       onError: (err) => toast.error('Suppression impossible', getErrorMessage(err)),
     });
@@ -94,10 +94,10 @@ export default function AdminMarquesPage() {
     toggleVisibility.mutate(id, {
       onSuccess: () =>
         toast.success(
-          isVisible ? 'Marque masquee' : 'Marque affichee',
+          isVisible ? 'Marque masquée' : 'Marque affichée',
           isVisible
-            ? 'Elle n’apparait plus sur le site public.'
-            : 'Elle est desormais visible sur le site public.',
+            ? 'Elle n’apparaît plus sur le site public.'
+            : 'Elle est désormais visible sur le site public.',
         ),
       onError: (err) => toast.error('Action impossible', getErrorMessage(err)),
     });
@@ -149,7 +149,7 @@ export default function AdminMarquesPage() {
                         item.isVisible ? 'text-green-600' : 'text-gray'
                       }`}
                     >
-                      {item.isVisible ? 'Visible' : 'Masque'}
+                      {item.isVisible ? 'Visible' : 'Masqué'}
                     </span>
                   </div>
                   {item.website && (

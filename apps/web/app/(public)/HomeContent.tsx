@@ -25,14 +25,14 @@ export function HomeContent() {
     '@context': 'https://schema.org',
     '@type': 'HairSalon',
     name: "KPIL'R Men",
-    description: 'Prothesiste capillaire specialise dans les transformations naturelles pour homme. Institut privé à Orleans.',
+    description: 'Prothésiste capillaire spécialisé dans les transformations naturelles pour homme. Institut privé à Orléans.',
     url: 'https://kpilr-men.fr',
     telephone: '+33666972562',
     email: 'kpilr-men@outlook.fr',
     address: {
       '@type': 'PostalAddress',
       streetAddress: '64 Quai des Augustins',
-      addressLocality: 'Orleans',
+      addressLocality: 'Orléans',
       postalCode: '45100',
       addressCountry: 'FR',
     },
@@ -72,39 +72,53 @@ export function HomeContent() {
         )}
 
         {/* Hero */}
-        <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-6 text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
-            Prothesiste capillaire
-          </p>
-          <h1 className="mt-6 font-montserrat text-5xl font-semibold tracking-tight md:text-7xl">
-            KPIL&apos;R Men
-          </h1>
-          <p className="mt-6 max-w-lg font-bodoni text-xl italic text-gray">
-            Envie de prendre soin de vous ? Besoin de retrouver confiance en vous ?
-          </p>
-          <p className="mt-4 max-w-lg text-sm text-gray">
-            Vous etes au bon endroit. Nous proposons des solutions naturelles et sur mesure.
-            KPIL&apos;R Men est un espace privé entièrement dedié à l&apos;homme et a son image.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/presentation"
-              className="border border-bois px-8 py-4 text-xs font-semibold uppercase tracking-widest text-bois transition-colors hover:bg-bois-light"
-            >
-              En savoir plus
-            </Link>
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-bois px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
-            >
-              Rendez-vous
-            </a>
+        <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
+          {/* Background */}
+          <Image
+            src="/assets/hero-institut.jpg"
+            alt="Interieur de l'institut KPIL'R Men a Orleans"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/60" />
+
+          {/* Content */}
+          <div className="relative z-10 flex flex-col items-center">
+            <p className="text-xs font-medium uppercase tracking-[0.5em] text-white/70">
+              Prothésiste capillaire
+            </p>
+            <h1 className="mt-6 font-montserrat text-5xl font-semibold tracking-tight text-white md:text-7xl">
+              KPIL&apos;R Men
+            </h1>
+            <p className="mt-6 max-w-lg font-bodoni text-xl italic text-white/90">
+              Envie de prendre soin de vous ? Besoin de retrouver confiance en vous ?
+            </p>
+            <p className="mt-4 max-w-lg text-sm text-white/80">
+              Vous êtes au bon endroit. Nous proposons des solutions naturelles et sur mesure.
+              KPIL&apos;R Men est un espace privé entièrement dédié à l&apos;homme et à son image.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Link
+                href="/presentation"
+                className="border border-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black"
+              >
+                En savoir plus
+              </Link>
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-bois px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white transition-colors hover:bg-bois/90"
+              >
+                Rendez-vous
+              </a>
+            </div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-gray">
-            <span className="animate-scroll-hint text-xs uppercase tracking-[0.4em]">Decouvrir</span>
+          <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/80">
+            <span className="animate-scroll-hint text-xs uppercase tracking-[0.4em]">Découvrir</span>
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -121,14 +135,14 @@ export function HomeContent() {
         {/* A propos */}
         <section className="bg-bois-light px-6 py-24">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">A propos</p>
+            <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">À propos</p>
             <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
               Un savoir-faire au service de votre image
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-gray">
-              Specialise en prothese capillaire, nous vous accompagnons dans votre transformation avec
-              des solutions naturelles et discretes. Chaque complement est adapte a votre morphologie,
-              votre style et vos attentes pour un resultat invisible et naturel.
+              Spécialisé en prothèse capillaire, nous vous accompagnons dans votre transformation avec
+              des solutions naturelles et discrètes. Chaque complément est adapté à votre morphologie,
+              votre style et vos attentes pour un résultat invisible et naturel.
             </p>
           </div>
         </section>
@@ -197,7 +211,7 @@ export function HomeContent() {
           <section className="bg-bois-light px-6 py-24">
             <div className="mx-auto max-w-6xl">
               <div className="text-center">
-                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Resultats</p>
+                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Résultats</p>
                 <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
                   Galerie
                 </h2>
@@ -218,7 +232,7 @@ export function HomeContent() {
                         />
                         <Image
                           src={item.afterImage}
-                          alt={`${item.title} - apres`}
+                          alt={`${item.title} - après`}
                           width={400}
                           height={300}
                           sizes="(max-width: 768px) 50vw, 16vw"
@@ -247,7 +261,7 @@ export function HomeContent() {
                   href="/galerie"
                   className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
                 >
-                  Voir la galerie complete
+                  Voir la galerie complète
                 </Link>
               </div>
             </div>
@@ -275,13 +289,13 @@ export function HomeContent() {
         {/* CTA Final */}
         <section className="bg-black px-6 py-24 text-center text-white">
           <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
-            Pret a changer ?
+            Prêt à changer ?
           </p>
           <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
-            Prenez rendez-vous des maintenant
+            Prenez rendez-vous dès maintenant
           </h2>
           <p className="mt-4 text-gray">
-            Consultation personnalisee pour definir la solution ideale.
+            Consultation personnalisée pour définir la solution idéale.
           </p>
           <a
             href={BOOKING_URL}

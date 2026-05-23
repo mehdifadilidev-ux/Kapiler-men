@@ -49,6 +49,18 @@ export function HomeContent() {
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday', opens: '09:30', closes: '19:00' },
       { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '09:00', closes: '18:00' },
     ],
+    areaServed: { '@type': 'City', name: 'Orléans' },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Prestations',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diagnostic & bilan capillaire' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Transformation capillaire' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Renouvellement de prothèse capillaire' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Entretien du complément capillaire' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Rituel barbe & soins du visage' } },
+      ],
+    },
   };
 
   return (

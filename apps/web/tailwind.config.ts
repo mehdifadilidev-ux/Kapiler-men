@@ -17,8 +17,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
-        bodoni: ['Bodoni Moda', 'serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        bodoni: ['var(--font-bodoni)', 'serif'],
       },
       animation: {
         scroll: 'scroll 30s linear infinite',

@@ -1,10 +1,25 @@
 import type { Metadata, Viewport } from 'next';
+import { Montserrat, Bodoni_Moda } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
+
+const bodoniModa = Bodoni_Moda({
+  subsets: ['latin'],
+  style: 'italic',
+  variable: '--font-bodoni',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kpilr-men.fr'),
   title: {
-    default: 'KPIL R Men — Prothésiste capillaire',
+    default: 'KPIL R Men — Prothésiste capillaire à Orléans',
     template: '%s | KPIL R Men',
   },
   description:
@@ -28,8 +43,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
-      <body className="bg-white text-black antialiased">{children}</body>
+    <html lang="fr" className={`${montserrat.variable} ${bodoniModa.variable}`}>
+      <body className="bg-white text-black antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

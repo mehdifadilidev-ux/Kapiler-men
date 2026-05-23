@@ -27,6 +27,7 @@ export function HomeContent() {
     name: "KPIL'R Men",
     description: 'Prothésiste capillaire spécialisé dans les transformations naturelles pour homme. Institut privé à Orléans.',
     url: 'https://kpilr-men.fr',
+    image: 'https://kpilr-men.fr/assets/hero-institut.jpg',
     telephone: '+33666972562',
     email: 'kpilr-men@outlook.fr',
     address: {

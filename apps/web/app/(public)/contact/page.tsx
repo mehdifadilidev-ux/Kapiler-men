@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact | KPIL R Men',
     description: 'Coordonnées et horaires',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

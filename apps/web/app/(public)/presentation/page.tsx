@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Présentation | KPIL R Men',
     description: 'Institut de prothèse capillaire pour homme à Orléans',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

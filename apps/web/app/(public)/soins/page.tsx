@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Soins | KPIL R Men',
     description: 'Soins capillaires sur mesure',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

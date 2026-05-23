@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     siteName: 'KPIL R Men',
     locale: 'fr_FR',
     type: 'website',
+    images: ['/assets/hero-institut.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

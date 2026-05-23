@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Galerie | KPIL R Men',
     description: 'Galerie photos : transformations, institut, événements',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

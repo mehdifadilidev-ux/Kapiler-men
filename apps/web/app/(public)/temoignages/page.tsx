@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Témoignages | KPIL R Men',
     description: 'Les avis de nos clients',
+    images: ['/assets/hero-institut.jpg'],
   },
 };
 

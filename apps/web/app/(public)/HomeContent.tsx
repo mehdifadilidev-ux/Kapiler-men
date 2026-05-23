@@ -153,10 +153,10 @@ export function HomeContent() {
             <div className="mx-auto max-w-6xl">
               <div className="text-center">
                 <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
-                  Nos soins
+                  Nos prestations
                 </p>
                 <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
-                  Soins
+                  Prestations
                 </h2>
               </div>
 
@@ -199,7 +199,7 @@ export function HomeContent() {
                   href="/soins"
                   className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
                 >
-                  Voir tous les soins
+                  Voir toutes les prestations
                 </Link>
               </div>
             </div>

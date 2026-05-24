@@ -14,6 +14,7 @@ const bodoniModa = Bodoni_Moda({
   style: 'italic',
   variable: '--font-bodoni',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {

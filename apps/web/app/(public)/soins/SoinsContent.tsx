@@ -22,7 +22,7 @@ export function SoinsContent() {
     <main className="mx-auto max-w-5xl px-6 py-24">
       {/* Intro */}
       <section className="mx-auto max-w-4xl text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Soins</p>
+        <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Prestations</p>
         <h1 className="mt-6 font-montserrat text-4xl font-semibold md:text-5xl">
           L&apos;expérience KPIL&apos;R MEN
         </h1>

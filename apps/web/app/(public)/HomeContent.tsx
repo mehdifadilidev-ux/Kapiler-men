@@ -101,7 +101,7 @@ export function HomeContent() {
             fill
             priority
             sizes="100vw"
-            className="hidden object-cover object-left md:block"
+            className="hidden object-cover [object-position:25%_50%] md:block"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/60" />
 

@@ -93,7 +93,7 @@ export function HomeContent() {
             fill
             priority
             sizes="100vw"
-            className="object-cover [object-position:90%_95%] md:hidden" 
+            className="object-cover [object-position:80%_95%] md:hidden" 
           />
           <Image
             src="/assets/hero-institut.jpg"

@@ -86,14 +86,22 @@ export function HomeContent() {
 
         {/* Hero */}
         <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
-          {/* Background */}
+          {/* Background — mobile (portrait) + desktop (panoramique) */}
+          <Image
+            src="/assets/hero-mobile.jpg"
+            alt="Interieur de l'institut KPIL'R Men a Orleans"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover md:hidden"
+          />
           <Image
             src="/assets/hero-institut.jpg"
             alt="Interieur de l'institut KPIL'R Men a Orleans"
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="hidden object-cover md:block"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/60" />
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { BOOKING_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -69,15 +70,30 @@ export default function PresentationPage() {
       </section>
 
       {/* Le lieu */}
-      <section className="mt-20 bg-bois-light px-6 py-16">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="font-montserrat text-2xl font-semibold">Le lieu</h2>
-          <p className="mt-6 leading-relaxed text-gray">
+      <section className="relative mt-20 overflow-hidden px-6 py-24">
+        <Image
+          src="/assets/presentation-lieu-mobile.jpg"
+          alt="L'institut KPIL'R Men à Orléans"
+          fill
+          sizes="100vw"
+          className="object-cover md:hidden"
+        />
+        <Image
+          src="/assets/presentation-lieu.jpg"
+          alt="L'institut KPIL'R Men à Orléans"
+          fill
+          sizes="100vw"
+          className="hidden object-cover md:block"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/30 to-black/60" />
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <h2 className="font-montserrat text-2xl font-semibold text-white">Le lieu</h2>
+          <p className="mt-6 leading-relaxed text-white/85">
             Pensé comme un lieu intime et confidentiel, l&apos;institut est loin de l&apos;agitation
             d&apos;un salon traditionnel. Chaque rendez-vous se déroule dans une atmosphère élégante
             et apaisante, inspirée d&apos;un univers barber revisité.
           </p>
-          <p className="mt-4 leading-relaxed text-gray">
+          <p className="mt-4 leading-relaxed text-white/85">
             Les tons blanc, noir et bois naturel créent un équilibre entre modernité, sobriété et
             chaleur, renforcé par une lumière douce qui accompagne chaque moment de soin.
           </p>

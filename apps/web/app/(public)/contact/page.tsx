@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BOOKING_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -123,20 +124,31 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Google Maps */}
+        {/* Nous trouver */}
         <section className="mt-16">
           <h2 className="font-montserrat text-xl font-semibold">Nous trouver</h2>
-          <div className="mt-6 aspect-video w-full overflow-hidden border border-bois-light">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2692.5!2d1.9037!3d47.9008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s64+Quai+des+Augustins%2C+45100+Orl%C3%A9ans!5e0!3m2!1sfr!2sfr"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="KPIL'R Men - 64 Quai des Augustins, Orléans"
-            />
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <div className="relative aspect-video w-full overflow-hidden border border-bois-light">
+              <Image
+                src="/assets/contact-devanture.jpg"
+                alt="Devanture de l'institut KPIL'R Men, 64 Quai des Augustins à Orléans"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="aspect-video w-full overflow-hidden border border-bois-light">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2692.5!2d1.9037!3d47.9008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s64+Quai+des+Augustins%2C+45100+Orl%C3%A9ans!5e0!3m2!1sfr!2sfr"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="KPIL'R Men - 64 Quai des Augustins, Orléans"
+              />
+            </div>
           </div>
         </section>
 

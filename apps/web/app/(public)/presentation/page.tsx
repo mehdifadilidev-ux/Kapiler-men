@@ -122,17 +122,30 @@ export default function PresentationPage() {
       </section>
 
       {/* La gerante */}
-      <section className="mx-auto mt-20 max-w-4xl">
-        <h2 className="font-montserrat text-2xl font-semibold">La gérante</h2>
-        <p className="mt-6 leading-relaxed text-gray">
-          Forte de 23 ans d&apos;expérience dans la coiffure, elle a toujours eu à c&oelig;ur
-          d&apos;évoluer et d&apos;affiner son expertise. Au fil des années, elle a identifié les
-          besoins spécifiques des hommes : discrétion, écoute, compréhension et solutions réellement
-          adaptées.
-        </p>
-        <p className="mt-4 leading-relaxed text-gray">
-          C&apos;est cette vision qui l&apos;a conduite à créer KPIL&apos;R Men.
-        </p>
+      <section className="mt-20 px-6">
+        <div className="mx-auto max-w-6xl md:grid md:grid-cols-2 md:items-center md:gap-12">
+          <div className="relative aspect-[5/4] w-full overflow-hidden">
+            <Image
+              src="/assets/presentation-gerante.jpg"
+              alt="La gérante de KPIL'R Men, prothésiste capillaire à Orléans"
+              fill
+              sizes="(max-width: 768px) 100vw, 600px"
+              className="object-cover"
+            />
+          </div>
+          <div className="mt-8 md:mt-0">
+            <h2 className="font-montserrat text-2xl font-semibold">La gérante</h2>
+            <p className="mt-6 leading-relaxed text-gray">
+              Forte de 23 ans d&apos;expérience dans la coiffure, elle a toujours eu à c&oelig;ur
+              d&apos;évoluer et d&apos;affiner son expertise. Au fil des années, elle a identifié les
+              besoins spécifiques des hommes : discrétion, écoute, compréhension et solutions réellement
+              adaptées.
+            </p>
+            <p className="mt-4 leading-relaxed text-gray">
+              C&apos;est cette vision qui l&apos;a conduite à créer KPIL&apos;R Men.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Les produits */}

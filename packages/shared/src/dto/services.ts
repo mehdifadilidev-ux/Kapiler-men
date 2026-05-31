@@ -19,12 +19,27 @@ export const updateServiceSchema = createServiceSchema.partial();
 
 export type UpdateServiceDto = z.infer<typeof updateServiceSchema>;
 
+const responsePrice = z.preprocess(
+  (val) => {
+    if (val === null || val === undefined || val === '') return null;
+    if (typeof val === 'string') {
+      const parsed = parseFloat(val);
+      return Number.isFinite(parsed) ? parsed : null;
+    }
+    return val;
+  },
+  z.number().positive().nullable(),
+);
+
 export const serviceSchema = createServiceSchema.extend({
   id: z.string().uuid(),
+  description: z.string().nullable().optional(),
+  duration: z.string().nullable().optional(),
   image: z.string().url().nullable(),
-  imageAlt: z.string().nullable(),
-  imageTitle: z.string().nullable(),
+  imageAlt: z.string().nullable().optional(),
+  imageTitle: z.string().nullable().optional(),
   features: z.array(z.string()),
+  price: responsePrice,
   section: z.string().nullable(),
   isActive: z.boolean(),
   position: z.number().int(),

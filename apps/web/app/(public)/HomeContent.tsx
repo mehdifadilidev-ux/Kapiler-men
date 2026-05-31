@@ -245,7 +245,8 @@ export function HomeContent() {
                       <div className="grid grid-cols-2 gap-3">
                         <Image
                           src={item.beforeImage}
-                          alt={`${item.title} - avant`}
+                          alt={`${item.imageAlt ?? item.title} – avant`}
+                          title={item.imageTitle ?? item.title}
                           width={400}
                           height={300}
                           sizes="(max-width: 768px) 50vw, 16vw"
@@ -253,7 +254,8 @@ export function HomeContent() {
                         />
                         <Image
                           src={item.afterImage}
-                          alt={`${item.title} - après`}
+                          alt={`${item.imageAlt ?? item.title} – après`}
+                          title={item.imageTitle ?? item.title}
                           width={400}
                           height={300}
                           sizes="(max-width: 768px) 50vw, 16vw"
@@ -263,7 +265,8 @@ export function HomeContent() {
                     ) : (
                       <Image
                         src={item.beforeImage}
-                        alt={item.title}
+                        alt={item.imageAlt ?? item.title}
+                        title={item.imageTitle ?? item.title}
                         width={400}
                         height={300}
                         sizes="(max-width: 768px) 100vw, 33vw"

@@ -10,7 +10,7 @@ export class UploadController {
 
   @Post('signed-url')
   async getSignedUrl(@Body() body: unknown) {
-    const { filename, contentType, slug } = signedUrlRequestSchema.parse(body);
-    return this.uploadService.generateSignedUrl(filename, contentType, slug);
+    const { filename, contentType, slug, folder } = signedUrlRequestSchema.parse(body);
+    return this.uploadService.generateSignedUrl(filename, contentType, slug, folder);
   }
 }

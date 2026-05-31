@@ -10,6 +10,8 @@ export const createGallerySchema = z.object({
   description: z.string().optional(),
   beforeImage: z.string().url(),
   afterImage: z.string().url().optional(),
+  imageAlt: z.string().max(255).optional(),
+  imageTitle: z.string().max(255).optional(),
 });
 
 export type CreateGalleryDto = z.infer<typeof createGallerySchema>;
@@ -26,6 +28,8 @@ export const galleryItemSchema = z.object({
   description: z.string().nullable(),
   beforeImage: z.string(),
   afterImage: z.string().nullable(),
+  imageAlt: z.string().nullable().optional(),
+  imageTitle: z.string().nullable().optional(),
   position: z.number().int(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),

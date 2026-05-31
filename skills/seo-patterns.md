@@ -8,12 +8,18 @@ Ce skill définit les patterns SEO à appliquer systématiquement sur chaque pag
 
 ## Checklist par page publique
 
-1. �� Export `metadata` ou `generateMetadata`
+1. �� Export `metadata` via le helper `pageMetadata()` de `@/lib/seo`
 2. ✅ Un seul `<h1>` unique et descriptif
 3. ✅ `next/image` pour toutes les images
 4. ✅ `next/link` pour toute navigation interne
 5. ✅ JSON-LD si pertinent (accueil, soins)
-6. ✅ Balise canonical (gérée par Next.js si `metadataBase` défini)
+6. ✅ Balise canonical **explicite** via `alternates.canonical`
+
+> ⚠️ `metadataBase` NE génère PAS de canonical — il ne sert qu'à résoudre les URLs
+> d'images OG relatives. Le canonical doit être déclaré explicitement (le helper
+> `pageMetadata()` le fait). De même, Next.js ne fusionne PAS les sous-champs
+> `openGraph`/`twitter` du parent : chaque page doit déclarer le set complet
+> (d'où le helper).
 
 ---
 
@@ -36,12 +42,12 @@ export const metadata: Metadata = {
 
 ```typescript
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.kpilrmen.fr'),
+  metadataBase: new URL('https://kpilr-men.fr'),
   title: {
-    default: "KPIL'R Men — Prothésiste capillaire",
-    template: '%s | KPIL R Men',
+    default: "KPIL'R Men — Prothésiste capillaire à Orléans",
+    template: "%s | KPIL'R Men",
   },
-  openGraph: { siteName: 'KPIL R Men', locale: 'fr_FR', type: 'website' },
+  openGraph: { siteName: "KPIL'R Men", locale: 'fr_FR', type: 'website' },
 };
 ```
 
@@ -55,7 +61,7 @@ const jsonLd = {
   '@type': 'HairSalon',
   name: "KPIL'R Men",
   description: "Prothésiste capillaire spécialisé. Institut privé à Orléans.",
-  url: 'https://www.kpilrmen.fr',
+  url: 'https://kpilr-men.fr',
   telephone: '+33666972562',
   email: 'kpilr-men@outlook.fr',
   address: {

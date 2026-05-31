@@ -1,17 +1,14 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { pageMetadata } from '@/lib/seo';
 import { BOOKING_URL } from '@/lib/constants';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Présentation',
   description:
     "Découvrez KPIL'R Men, institut de prothèse capillaire pour homme à Orléans. Un savoir-faire au service de votre image.",
-  openGraph: {
-    title: 'Présentation | KPIL R Men',
-    description: 'Institut de prothèse capillaire pour homme à Orléans',
-    images: ['/assets/hero-institut.jpg'],
-  },
-};
+  path: '/presentation',
+});
 
 export default function PresentationPage() {
   return (

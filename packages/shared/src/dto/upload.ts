@@ -2,12 +2,16 @@ import { z } from 'zod';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'] as const;
 
+export const UPLOAD_FOLDERS = ['gallery', 'services'] as const;
+export type UploadFolder = (typeof UPLOAD_FOLDERS)[number];
+
 export const signedUrlRequestSchema = z.object({
   filename: z.string().min(1).max(255),
   contentType: z.enum(ALLOWED_TYPES, {
     errorMap: () => ({ message: 'Format accepté : JPG, PNG, WebP' }),
   }),
   slug: z.string().min(1).max(120).optional(),
+  folder: z.enum(UPLOAD_FOLDERS).optional(),
 });
 
 export type SignedUrlRequest = z.infer<typeof signedUrlRequestSchema>;

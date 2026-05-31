@@ -19,6 +19,8 @@ interface GalleryFormData {
   description: string;
   beforeImage: string;
   afterImage: string;
+  imageAlt: string;
+  imageTitle: string;
 }
 
 type ModalState =
@@ -43,6 +45,8 @@ export default function AdminGaleriePage() {
         description: data.description || undefined,
         beforeImage: data.beforeImage,
         afterImage: data.type === 'before_after' ? data.afterImage : undefined,
+        imageAlt: data.imageAlt || undefined,
+        imageTitle: data.imageTitle || undefined,
       },
       {
         onSuccess: () => {
@@ -64,6 +68,8 @@ export default function AdminGaleriePage() {
           description: data.description || undefined,
           beforeImage: data.beforeImage,
           afterImage: data.type === 'before_after' ? data.afterImage : undefined,
+          imageAlt: data.imageAlt || undefined,
+          imageTitle: data.imageTitle || undefined,
         },
       },
       {

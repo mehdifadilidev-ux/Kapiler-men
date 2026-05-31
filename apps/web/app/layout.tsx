@@ -20,20 +20,20 @@ const bodoniModa = Bodoni_Moda({
 export const metadata: Metadata = {
   metadataBase: new URL('https://kpilr-men.fr'),
   title: {
-    default: 'KPIL R Men — Prothésiste capillaire à Orléans',
-    template: '%s | KPIL R Men',
+    default: "KPIL'R Men — Prothésiste capillaire à Orléans",
+    template: "%s | KPIL'R Men",
   },
   description:
     'Prothésiste capillaire spécialisé. Transformations naturelles, compléments capillaires sur mesure.',
   openGraph: {
-    siteName: 'KPIL R Men',
+    siteName: "KPIL'R Men",
     locale: 'fr_FR',
     type: 'website',
-    images: ['/assets/hero-institut.jpg'],
+    images: ['/assets/og-image.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/assets/hero-institut.jpg'],
+    images: ['/assets/og-image.jpg'],
   },
 };
 

@@ -227,7 +227,7 @@ export async function SoinsContent() {
 
                 <div className="flex min-w-0 flex-1 flex-col justify-between p-8">
                   <div className="min-w-0 break-words">
-                    <h2 className="font-montserrat text-2xl font-semibold">{service.title}</h2>
+                    <h3 className="font-montserrat text-2xl font-semibold">{service.title}</h3>
 
                     {(service.price || service.duration) && (
                       <div className="mt-3 inline-flex items-center gap-2 bg-bois-light px-3 py-1 text-sm text-bois">

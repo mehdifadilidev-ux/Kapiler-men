@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api-client';
-import type { SignedUrlResponse } from '@kpil/shared';
+import type { SignedUrlResponse, UploadFolder } from '@kpil/shared';
 
 interface UploadResult {
   publicUrl: string;
@@ -10,15 +10,16 @@ interface UploadResult {
 interface UploadInput {
   file: File;
   slug?: string | undefined;
+  folder?: UploadFolder | undefined;
 }
 
 export function useUploadImage() {
   return useMutation({
-    mutationFn: async ({ file, slug }: UploadInput): Promise<UploadResult> => {
+    mutationFn: async ({ file, slug, folder }: UploadInput): Promise<UploadResult> => {
       // 1. Get signed URL from backend
       const { signedUrl, publicUrl, filePath } = await apiClient.post<SignedUrlResponse>(
         '/admin/upload/signed-url',
-        { filename: file.name, contentType: file.type, slug },
+        { filename: file.name, contentType: file.type, slug, folder },
       );
 
       // 2. Upload directly to Firebase Storage

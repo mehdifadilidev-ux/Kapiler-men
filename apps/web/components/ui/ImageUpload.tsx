@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import type { UploadFolder } from '@kpil/shared';
 import { validateImage } from '@/lib/validateImage';
 import { useUploadImage } from '@/queries/useUpload';
 
@@ -10,9 +11,10 @@ interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
   slug?: string | undefined;
+  folder?: UploadFolder | undefined;
 }
 
-export function ImageUpload({ label, value, onChange, slug }: ImageUploadProps) {
+export function ImageUpload({ label, value, onChange, slug, folder }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const upload = useUploadImage();
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +31,7 @@ export function ImageUpload({ label, value, onChange, slug }: ImageUploadProps) 
 
     setError(null);
     upload.mutate(
-      { file, slug },
+      { file, slug, folder },
       {
         onSuccess: (result) => {
           onChange(result.publicUrl);

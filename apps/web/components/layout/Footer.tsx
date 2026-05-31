@@ -28,7 +28,7 @@ export function Footer() {
           <div>
             <Image
               src="/assets/logo.jpg"
-              alt="KPIL R Men"
+              alt="KPIL'R Men"
               width={120}
               height={40}
               className="h-10 w-auto"

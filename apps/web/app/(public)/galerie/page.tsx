@@ -1,16 +1,13 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { GalerieContent } from './GalerieContent';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Galerie',
   description:
     'Découvrez nos réalisations en images : transformations capillaires, institut, événements.',
-  openGraph: {
-    title: 'Galerie | KPIL R Men',
-    description: 'Galerie photos : transformations, institut, événements',
-    images: ['/assets/hero-institut.jpg'],
-  },
-};
+  path: '/galerie',
+});
 
 export default function GaleriePage() {
   return <GalerieContent />;

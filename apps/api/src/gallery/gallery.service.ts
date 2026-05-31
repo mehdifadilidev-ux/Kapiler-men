@@ -11,6 +11,8 @@ interface GalleryRow {
   description: string | null;
   before_image: string;
   after_image: string | null;
+  image_alt: string | null;
+  image_title: string | null;
   position: number;
   created_at: Date;
   updated_at: Date;
@@ -24,6 +26,8 @@ export interface GalleryResponse {
   description: string | null;
   beforeImage: string;
   afterImage: string | null;
+  imageAlt: string | null;
+  imageTitle: string | null;
   position: number;
   createdAt: string;
   updatedAt: string;
@@ -38,6 +42,8 @@ function toResponse(row: GalleryRow): GalleryResponse {
     description: row.description,
     beforeImage: row.before_image,
     afterImage: row.after_image,
+    imageAlt: row.image_alt,
+    imageTitle: row.image_title,
     position: row.position,
     createdAt: row.created_at.toISOString(),
     updatedAt: row.updated_at.toISOString(),
@@ -87,7 +93,7 @@ export class GalleryService {
     const nextPosition = (maxPos?.max ?? -1) + 1;
 
     const [item] = await this.db.sql<GalleryRow[]>`
-      INSERT INTO gallery_items (category_id, type, title, description, before_image, after_image, position)
+      INSERT INTO gallery_items (category_id, type, title, description, before_image, after_image, image_alt, image_title, position)
       VALUES (
         ${dto.categoryId ?? null},
         ${dto.type ?? 'before_after'},
@@ -95,6 +101,8 @@ export class GalleryService {
         ${dto.description ?? null},
         ${dto.beforeImage},
         ${dto.afterImage ?? null},
+        ${dto.imageAlt ?? null},
+        ${dto.imageTitle ?? null},
         ${nextPosition}
       )
       RETURNING *
@@ -124,6 +132,8 @@ export class GalleryService {
         description = ${dto.description ?? existing.description},
         before_image = ${dto.beforeImage ?? existing.before_image},
         after_image = ${dto.afterImage ?? existing.after_image},
+        image_alt = ${dto.imageAlt ?? existing.image_alt},
+        image_title = ${dto.imageTitle ?? existing.image_title},
         updated_at = NOW()
       WHERE id = ${id}
       RETURNING *

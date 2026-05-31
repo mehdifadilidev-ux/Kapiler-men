@@ -144,6 +144,7 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
             value={image}
             onChange={setImage}
             slug={title.trim() || undefined}
+            folder="services"
           />
 
           {/* SEO — alt + title de l'image */}

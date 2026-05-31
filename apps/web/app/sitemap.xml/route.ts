@@ -1,9 +1,10 @@
 import { z } from 'zod';
-import { serviceSchema, type Service } from '@kpil/shared';
+import { serviceSchema, galleryItemSchema, type Service, type GalleryItem } from '@kpil/shared';
 
 const SITE_URL = 'https://kpilr-men.fr';
 
 const servicesArraySchema = z.array(serviceSchema);
+const galleryArraySchema = z.array(galleryItemSchema);
 
 const STATIC_PAGES: Array<{
   path: string;
@@ -31,6 +32,18 @@ async function fetchServices(): Promise<Service[]> {
   }
 }
 
+async function fetchGallery(): Promise<GalleryItem[]> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!baseUrl) return [];
+  try {
+    const res = await fetch(`${baseUrl}/gallery`, { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    return galleryArraySchema.parse(await res.json());
+  } catch {
+    return [];
+  }
+}
+
 function escapeXml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -48,19 +61,43 @@ function buildImageBlock(loc: string, title: string | null, caption: string | nu
   return parts.join('\n');
 }
 
-export async function GET(): Promise<Response> {
-  const services = await fetchServices();
-  const lastmod = new Date().toISOString();
-  const soinsImages = services
-    .filter((service): service is Service & { image: string } => Boolean(service.image))
-    .map((service) =>
-      buildImageBlock(service.image, service.imageTitle ?? service.title, service.imageAlt ?? service.title),
-    )
+function buildServiceImages(services: Service[]): string {
+  return services
+    .filter((s): s is Service & { image: string } => Boolean(s.image))
+    .map((s) => buildImageBlock(s.image, s.imageTitle ?? s.title, s.imageAlt ?? s.title))
     .join('\n');
+}
+
+function buildGalleryImages(items: GalleryItem[]): string {
+  return items
+    .flatMap((item) => {
+      const title = item.imageTitle ?? item.title;
+      const altBase = item.imageAlt ?? item.title;
+      const isBeforeAfter = item.type === 'before_after' && Boolean(item.afterImage);
+      const blocks = [
+        buildImageBlock(item.beforeImage, title, isBeforeAfter ? `${altBase} – avant` : altBase),
+      ];
+      if (isBeforeAfter && item.afterImage) {
+        blocks.push(buildImageBlock(item.afterImage, title, `${altBase} – après`));
+      }
+      return blocks;
+    })
+    .join('\n');
+}
+
+export async function GET(): Promise<Response> {
+  const [services, gallery] = await Promise.all([fetchServices(), fetchGallery()]);
+
+  const lastmod = new Date().toISOString();
+  const imagesByPath: Record<string, string> = {
+    '/soins': buildServiceImages(services),
+    '/galerie': buildGalleryImages(gallery),
+  };
 
   const urlEntries = STATIC_PAGES.map(({ path, changefreq, priority }) => {
     const loc = `${SITE_URL}${path}`;
-    const imagesBlock = path === '/soins' && soinsImages ? `\n${soinsImages}` : '';
+    const images = imagesByPath[path];
+    const imagesBlock = images ? `\n${images}` : '';
     return `  <url>
     <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>

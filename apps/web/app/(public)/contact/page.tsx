@@ -1,18 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { pageMetadata } from '@/lib/seo';
 import { BOOKING_URL } from '@/lib/constants';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Contact',
   description:
     "Contactez KPIL'R Men, institut de prothèse capillaire à Orléans. 64 Quai des Augustins, 45100 Orléans.",
-  openGraph: {
-    title: 'Contact | KPIL R Men',
-    description: 'Coordonnées et horaires',
-    images: ['/assets/hero-institut.jpg'],
-  },
-};
+  path: '/contact',
+});
 
 const HOURS = [
   { day: 'Lundi', hours: '9h30 - 19h00' },

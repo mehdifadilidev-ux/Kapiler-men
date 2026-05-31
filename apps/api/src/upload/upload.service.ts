@@ -26,12 +26,16 @@ export class UploadService {
     return this._bucket;
   }
 
-  async generateSignedUrl(filename: string, contentType: string, slug?: string) {
+  async generateSignedUrl(
+    filename: string,
+    contentType: string,
+    slug?: string,
+    folder: 'gallery' | 'services' = 'gallery',
+  ) {
     const ext = filename.split('.').pop()?.toLowerCase() ?? 'jpg';
     const cleanSlug = slug ? slugify(slug) : '';
     const shortId = uuidv4().slice(0, 8);
     const fileName = cleanSlug ? `${cleanSlug}-${shortId}.${ext}` : `${uuidv4()}.${ext}`;
-    const folder = cleanSlug ? 'services' : 'gallery';
     const filePath = `${folder}/${fileName}`;
     const file = this.getBucket().file(filePath);
 

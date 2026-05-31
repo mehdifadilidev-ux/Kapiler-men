@@ -9,9 +9,10 @@ interface ImageUploadProps {
   label: string;
   value: string;
   onChange: (url: string) => void;
+  slug?: string | undefined;
 }
 
-export function ImageUpload({ label, value, onChange }: ImageUploadProps) {
+export function ImageUpload({ label, value, onChange, slug }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const upload = useUploadImage();
   const [error, setError] = useState<string | null>(null);
@@ -27,14 +28,17 @@ export function ImageUpload({ label, value, onChange }: ImageUploadProps) {
     }
 
     setError(null);
-    upload.mutate(file, {
-      onSuccess: (result) => {
-        onChange(result.publicUrl);
+    upload.mutate(
+      { file, slug },
+      {
+        onSuccess: (result) => {
+          onChange(result.publicUrl);
+        },
+        onError: () => {
+          setError('Erreur lors de l\'upload. Vérifiez votre connexion.');
+        },
       },
-      onError: () => {
-        setError('Erreur lors de l\'upload. Vérifiez votre connexion.');
-      },
-    });
+    );
   };
 
   return (

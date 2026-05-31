@@ -7,6 +7,7 @@ export const signedUrlRequestSchema = z.object({
   contentType: z.enum(ALLOWED_TYPES, {
     errorMap: () => ({ message: 'Format accepté : JPG, PNG, WebP' }),
   }),
+  slug: z.string().min(1).max(120).optional(),
 });
 
 export type SignedUrlRequest = z.infer<typeof signedUrlRequestSchema>;

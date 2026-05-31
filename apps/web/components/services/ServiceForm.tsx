@@ -16,6 +16,8 @@ interface ServiceFormData {
   title: string;
   description: string;
   image: string;
+  imageAlt: string;
+  imageTitle: string;
   features: string[];
   price: number | undefined;
   duration: string;
@@ -33,6 +35,8 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
   const [title, setTitle] = useState(item?.title ?? '');
   const [description, setDescription] = useState(item?.description ?? '');
   const [image, setImage] = useState(item?.image ?? '');
+  const [imageAlt, setImageAlt] = useState(item?.imageAlt ?? '');
+  const [imageTitle, setImageTitle] = useState(item?.imageTitle ?? '');
   const [features, setFeatures] = useState<string[]>(item?.features ?? []);
   const [newFeature, setNewFeature] = useState('');
   const [price, setPrice] = useState(item?.price ? String(item.price) : '');
@@ -66,6 +70,8 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
       title: title.trim(),
       description: description.trim(),
       image,
+      imageAlt: imageAlt.trim(),
+      imageTitle: imageTitle.trim(),
       features,
       price: price ? parseFloat(price) : undefined,
       duration: duration.trim(),
@@ -133,7 +139,53 @@ export function ServiceForm({ item, onSubmit, onCancel, isPending }: ServiceForm
           </div>
 
           {/* Image */}
-          <ImageUpload label="Image de la prestation (optionnel)" value={image} onChange={setImage} />
+          <ImageUpload
+            label="Image de la prestation (optionnel)"
+            value={image}
+            onChange={setImage}
+            slug={title.trim() || undefined}
+          />
+
+          {/* SEO — alt + title de l'image */}
+          {image && (
+            <div className="space-y-4 border-l-2 border-bois-light pl-4">
+              <p className="text-xs font-medium uppercase tracking-widest text-bois">SEO de l&apos;image</p>
+              <div>
+                <label htmlFor="service-image-alt" className="block text-sm font-medium">
+                  Texte alternatif (alt)
+                </label>
+                <input
+                  id="service-image-alt"
+                  type="text"
+                  value={imageAlt}
+                  onChange={(e) => setImageAlt(e.target.value)}
+                  maxLength={255}
+                  className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
+                  placeholder="Ex: Prothèse capillaire homme avec fixation discrète, vue de profil"
+                />
+                <p className="mt-1 text-xs text-gray">
+                  Décrit l&apos;image pour Google et les lecteurs d&apos;écran. Si vide, le titre de la prestation sera utilisé.
+                </p>
+              </div>
+              <div>
+                <label htmlFor="service-image-title" className="block text-sm font-medium">
+                  Titre (tooltip au survol)
+                </label>
+                <input
+                  id="service-image-title"
+                  type="text"
+                  value={imageTitle}
+                  onChange={(e) => setImageTitle(e.target.value)}
+                  maxLength={255}
+                  className="mt-1 w-full border border-gray/30 px-4 py-3 text-sm focus:border-bois focus:outline-none"
+                  placeholder="Ex: Transformation Essentielle — Orléans"
+                />
+                <p className="mt-1 text-xs text-gray">
+                  S&apos;affiche au survol de l&apos;image. Optionnel.
+                </p>
+              </div>
+            </div>
+          )}
 
           {/* Features */}
           <div>

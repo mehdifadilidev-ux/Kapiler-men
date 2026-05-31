@@ -7,13 +7,18 @@ interface UploadResult {
   filePath: string;
 }
 
+interface UploadInput {
+  file: File;
+  slug?: string | undefined;
+}
+
 export function useUploadImage() {
   return useMutation({
-    mutationFn: async (file: File): Promise<UploadResult> => {
+    mutationFn: async ({ file, slug }: UploadInput): Promise<UploadResult> => {
       // 1. Get signed URL from backend
       const { signedUrl, publicUrl, filePath } = await apiClient.post<SignedUrlResponse>(
         '/admin/upload/signed-url',
-        { filename: file.name, contentType: file.type },
+        { filename: file.name, contentType: file.type, slug },
       );
 
       // 2. Upload directly to Firebase Storage

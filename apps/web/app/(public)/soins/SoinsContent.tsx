@@ -1,25 +1,89 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { apiClient } from '@/lib/api-client';
+import { z } from 'zod';
 import { BOOKING_URL } from '@/lib/constants';
-import type { Service } from '@kpil/shared';
+import { serviceSchema, type Service } from '@kpil/shared';
 
-export function SoinsContent() {
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
+const servicesArraySchema = z.array(serviceSchema);
 
-  useEffect(() => {
-    apiClient
-      .get<Service[]>('/services')
-      .then(setServices)
-      .catch(() => setServices([]))
-      .finally(() => setLoading(false));
-  }, []);
+async function fetchServices(): Promise<Service[]> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!baseUrl) return [];
+  try {
+    const res = await fetch(`${baseUrl}/services`, { next: { revalidate: 60 } });
+    if (!res.ok) return [];
+    return servicesArraySchema.parse(await res.json());
+  } catch {
+    return [];
+  }
+}
+
+const SITE_URL = 'https://kpilr-men.fr';
+
+function buildServicesJsonLd(services: Service[]): string {
+  const provider = {
+    '@type': 'HairSalon',
+    name: "KPIL'R Men",
+    image: `${SITE_URL}/assets/hero-institut.jpg`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '64 Quai des Augustins',
+      addressLocality: 'Orléans',
+      postalCode: '45100',
+      addressCountry: 'FR',
+    },
+    telephone: '+33666972562',
+    url: SITE_URL,
+  };
+
+  const itemListElement = services.map((service, index) => {
+    const offers = service.price
+      ? {
+          '@type': 'Offer',
+          price: service.price,
+          priceCurrency: 'EUR',
+          availability: 'https://schema.org/InStock',
+        }
+      : undefined;
+
+    const serviceLd: Record<string, unknown> = {
+      '@type': 'Service',
+      name: service.title,
+      provider,
+      areaServed: { '@type': 'City', name: 'Orléans' },
+    };
+    if (service.description) serviceLd.description = service.description;
+    if (service.image) serviceLd.image = service.image;
+    if (offers) serviceLd.offers = offers;
+
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      item: serviceLd,
+    };
+  });
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Prestations KPIL’R Men',
+    itemListElement,
+  };
+
+  return JSON.stringify(graph);
+}
+
+export async function SoinsContent() {
+  const services = await fetchServices();
+  const jsonLd = services.length > 0 ? buildServicesJsonLd(services) : null;
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-24">
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLd }}
+        />
+      )}
       {/* Intro */}
       <section className="mx-auto max-w-4xl text-center">
         <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">Prestations</p>
@@ -134,9 +198,7 @@ export function SoinsContent() {
       {/* Liste des soins */}
       <section className="mx-auto mt-20 max-w-5xl">
         <h2 className="mb-12 text-center font-montserrat text-2xl font-semibold">Nos prestations</h2>
-        {loading ? (
-          <p className="text-gray">Chargement...</p>
-        ) : services.length > 0 ? (
+        {services.length > 0 ? (
           groupBySection(services).map(([sectionName, sectionServices]) => (
             <div key={sectionName || 'autres'} className="mt-16 first:mt-0">
               {sectionName && (
@@ -155,7 +217,8 @@ export function SoinsContent() {
                 <div className="relative h-64 md:h-auto md:w-80">
                   <Image
                     src={service.image}
-                    alt={service.title}
+                    alt={service.imageAlt ?? service.title}
+                    title={service.imageTitle ?? service.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 320px"
                     className="object-cover"

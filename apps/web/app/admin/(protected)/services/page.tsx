@@ -27,12 +27,14 @@ export default function AdminServicesPage() {
   const [modal, setModal] = useState<ModalState>({ type: 'closed' });
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
 
-  const handleCreate = (data: { title: string; description: string; image: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
+  const handleCreate = (data: { title: string; description: string; image: string; imageAlt: string; imageTitle: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
     createService.mutate(
       {
         title: data.title,
         description: data.description || undefined,
         image: data.image || undefined,
+        imageAlt: data.imageAlt || undefined,
+        imageTitle: data.imageTitle || undefined,
         features: data.features,
         price: data.price,
         duration: data.duration || undefined,
@@ -48,7 +50,7 @@ export default function AdminServicesPage() {
     );
   };
 
-  const handleUpdate = (id: string, data: { title: string; description: string; image: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
+  const handleUpdate = (id: string, data: { title: string; description: string; image: string; imageAlt: string; imageTitle: string; features: string[]; price: number | undefined; duration: string; section: string }) => {
     updateService.mutate(
       {
         id,
@@ -56,6 +58,8 @@ export default function AdminServicesPage() {
           title: data.title,
           description: data.description || undefined,
           image: data.image || undefined,
+          imageAlt: data.imageAlt || undefined,
+          imageTitle: data.imageTitle || undefined,
           features: data.features,
           price: data.price,
           duration: data.duration || undefined,

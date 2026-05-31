@@ -4,6 +4,8 @@ export const createServiceSchema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().optional(),
   image: z.string().url().optional(),
+  imageAlt: z.string().max(255).optional(),
+  imageTitle: z.string().max(255).optional(),
   features: z.array(z.string().min(1)).optional(),
   duration: z.string().max(50).optional(),
   price: z.number().positive().optional(),
@@ -20,6 +22,8 @@ export type UpdateServiceDto = z.infer<typeof updateServiceSchema>;
 export const serviceSchema = createServiceSchema.extend({
   id: z.string().uuid(),
   image: z.string().url().nullable(),
+  imageAlt: z.string().nullable(),
+  imageTitle: z.string().nullable(),
   features: z.array(z.string()),
   section: z.string().nullable(),
   isActive: z.boolean(),

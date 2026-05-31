@@ -3,6 +3,17 @@ import { getStorage } from 'firebase-admin/storage';
 import { v4 as uuidv4 } from 'uuid';
 import type { Bucket } from '@google-cloud/storage';
 
+function slugify(input: string): string {
+  return input
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[‘’']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80);
+}
+
 @Injectable()
 export class UploadService {
   private readonly logger = new Logger(UploadService.name);
@@ -15,9 +26,13 @@ export class UploadService {
     return this._bucket;
   }
 
-  async generateSignedUrl(filename: string, contentType: string) {
-    const ext = filename.split('.').pop();
-    const filePath = `gallery/${uuidv4()}.${ext}`;
+  async generateSignedUrl(filename: string, contentType: string, slug?: string) {
+    const ext = filename.split('.').pop()?.toLowerCase() ?? 'jpg';
+    const cleanSlug = slug ? slugify(slug) : '';
+    const shortId = uuidv4().slice(0, 8);
+    const fileName = cleanSlug ? `${cleanSlug}-${shortId}.${ext}` : `${uuidv4()}.${ext}`;
+    const folder = cleanSlug ? 'services' : 'gallery';
+    const filePath = `${folder}/${fileName}`;
     const file = this.getBucket().file(filePath);
 
     const [signedUrl] = await file.getSignedUrl({

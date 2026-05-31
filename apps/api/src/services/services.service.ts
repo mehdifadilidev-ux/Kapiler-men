@@ -7,6 +7,8 @@ interface ServiceRow {
   title: string;
   description: string | null;
   image: string | null;
+  image_alt: string | null;
+  image_title: string | null;
   features: string[];
   duration: string | null;
   price: string | null;
@@ -22,6 +24,8 @@ export interface ServiceResponse {
   title: string;
   description: string | null;
   image: string | null;
+  imageAlt: string | null;
+  imageTitle: string | null;
   features: string[];
   duration: string | null;
   price: string | null;
@@ -38,6 +42,8 @@ function toResponse(row: ServiceRow): ServiceResponse {
     title: row.title,
     description: row.description,
     image: row.image,
+    imageAlt: row.image_alt,
+    imageTitle: row.image_title,
     features: row.features ?? [],
     duration: row.duration,
     price: row.price,
@@ -86,11 +92,13 @@ export class ServicesService {
     const nextPosition = (maxPos?.max ?? -1) + 1;
 
     const [item] = await this.db.sql<ServiceRow[]>`
-      INSERT INTO services (title, description, image, features, duration, price, section, is_active, position)
+      INSERT INTO services (title, description, image, image_alt, image_title, features, duration, price, section, is_active, position)
       VALUES (
         ${dto.title},
         ${dto.description ?? null},
         ${dto.image ?? null},
+        ${dto.imageAlt ?? null},
+        ${dto.imageTitle ?? null},
         ${dto.features ?? []},
         ${dto.duration ?? null},
         ${dto.price ?? null},
@@ -122,6 +130,8 @@ export class ServicesService {
         title = ${dto.title ?? existing.title},
         description = ${dto.description ?? existing.description},
         image = ${dto.image ?? existing.image},
+        image_alt = ${dto.imageAlt ?? existing.image_alt},
+        image_title = ${dto.imageTitle ?? existing.image_title},
         features = ${dto.features ?? existing.features},
         duration = ${dto.duration ?? existing.duration},
         price = ${dto.price ?? existing.price},

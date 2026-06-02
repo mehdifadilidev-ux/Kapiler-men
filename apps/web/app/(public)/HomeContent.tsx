@@ -309,7 +309,7 @@ export function HomeContent() {
               </div>
 
               <div className="mt-16">
-                <TestimonialsMarquee testimonials={testimonials} />
+                <TestimonialsMarquee testimonials={testimonials} compact />
               </div>
 
               <div className="mt-12 text-center">

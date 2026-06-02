@@ -6,19 +6,22 @@ import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
 import { BOOKING_URL } from '@/lib/constants';
 import { useOverflowScroll } from '@/lib/useOverflowScroll';
-import type { Service, GalleryItem, NewsBanner, PartnerBrand } from '@kpil/shared';
+import type { Service, GalleryItem, NewsBanner, PartnerBrand, Testimonial } from '@kpil/shared';
+import { TestimonialsMarquee } from './temoignages/TestimonialsMarquee';
 
 export function HomeContent() {
   const [services, setServices] = useState<Service[]>([]);
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [banner, setBanner] = useState<NewsBanner | null>(null);
   const [brands, setBrands] = useState<PartnerBrand[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
     apiClient.get<Service[]>('/services').then(setServices).catch(() => setServices([]));
     apiClient.get<GalleryItem[]>('/gallery').then(setGalleryItems).catch(() => setGalleryItems([]));
     apiClient.get<NewsBanner | null>('/news-banner').then(setBanner).catch(() => setBanner(null));
     apiClient.get<PartnerBrand[]>('/partner-brands').then(setBrands).catch(() => setBrands([]));
+    apiClient.get<Testimonial[]>('/testimonials').then(setTestimonials).catch(() => setTestimonials([]));
   }, []);
 
   const jsonLd = {
@@ -248,18 +251,18 @@ export function HomeContent() {
                           alt={`${item.imageAlt ?? item.title} – avant`}
                           title={item.imageTitle ?? item.title}
                           width={400}
-                          height={300}
+                          height={500}
                           sizes="(max-width: 768px) 50vw, 16vw"
-                          className="aspect-[4/3] w-full rounded object-cover"
+                          className="aspect-[4/5] w-full rounded object-cover"
                         />
                         <Image
                           src={item.afterImage}
                           alt={`${item.imageAlt ?? item.title} – après`}
                           title={item.imageTitle ?? item.title}
                           width={400}
-                          height={300}
+                          height={500}
                           sizes="(max-width: 768px) 50vw, 16vw"
-                          className="aspect-[4/3] w-full rounded object-cover"
+                          className="aspect-[4/5] w-full rounded object-cover"
                         />
                       </div>
                     ) : (
@@ -268,9 +271,9 @@ export function HomeContent() {
                         alt={item.imageAlt ?? item.title}
                         title={item.imageTitle ?? item.title}
                         width={400}
-                        height={300}
+                        height={500}
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="aspect-[4/3] w-full rounded object-cover"
+                        className="aspect-[4/5] w-full rounded object-cover"
                       />
                     )}
                     <p className="text-center font-montserrat text-sm font-semibold">
@@ -292,9 +295,38 @@ export function HomeContent() {
           </section>
         )}
 
+        {/* Temoignages */}
+        {testimonials.length > 0 && (
+          <section className="px-6 py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="text-center">
+                <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">
+                  Témoignages
+                </p>
+                <h2 className="mt-4 font-montserrat text-3xl font-semibold md:text-4xl">
+                  Ils nous ont fait confiance
+                </h2>
+              </div>
+
+              <div className="mt-16">
+                <TestimonialsMarquee testimonials={testimonials} />
+              </div>
+
+              <div className="mt-12 text-center">
+                <Link
+                  href="/temoignages"
+                  className="text-sm font-semibold text-bois underline underline-offset-4 transition-colors hover:text-bois/80"
+                >
+                  Voir tous les témoignages
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Marques partenaires */}
         {brands.length > 0 && (
-          <section className="px-6 py-24">
+          <section className="bg-bois-light px-6 py-24">
             <div className="mx-auto max-w-6xl">
               <div className="text-center">
                 <p className="text-xs font-medium uppercase tracking-[0.5em] text-gray">

@@ -22,6 +22,7 @@ const config: Config = {
       },
       animation: {
         scroll: 'scroll 30s linear infinite',
+        'scroll-slow': 'scroll 60s linear infinite',
         'scroll-hint': 'scroll-hint 2s ease-in-out infinite',
       },
       keyframes: {

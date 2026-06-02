@@ -30,7 +30,7 @@ export function TestimonialsMarquee({ testimonials }: { testimonials: Testimonia
       <div
         ref={contentRef}
         className={
-          shouldScroll ? 'animate-scroll flex w-max gap-8' : 'flex justify-center gap-8'
+          shouldScroll ? 'animate-scroll-slow flex w-max gap-8' : 'flex justify-center gap-8'
         }
       >
         {testimonials.map((item) => (

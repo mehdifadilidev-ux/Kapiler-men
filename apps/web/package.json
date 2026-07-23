@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@kpil/shared": "workspace:*",
+    "@next/third-parties": "^14.2.0",
     "@tanstack/react-query": "^5.50.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "next": "^14.2.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
+    "sharp": "^0.34.5",
     "zod": "^3.23.0",
     "zustand": "^4.5.0"
   },
